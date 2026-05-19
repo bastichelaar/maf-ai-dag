@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eén Marketeer, Vele Agents · Workshop AI-Stack voor MAF Nederland</title>
+    <link rel="icon" type="image/png" href="https://rikgoedhart.nl/wp-content/uploads/2023/11/Favicon-Rikgoedhart.png">
+    <meta property="og:title" content="Eén Marketeer, Vele Agents.">
+    <meta property="og:description" content="Workshop AI-Stack: Claude Code, ChatGPT, Codex en Copilot voor de marketing-afdeling van MAF Nederland.">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="nl_NL">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+    <script>
+        (function() {
+            var saved = null;
+            try { saved = localStorage.getItem('theme'); } catch(e) {}
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <style>
+        /* ============================================================
+           MAF WORKSHOP — EDITORIAL DECK STIJL
+           Doorgescrolde presentatie, redactionele toon, niet-rapport.
+           ============================================================ */
+
+        :root {
+            --maf-red: #C8102E;
+            --maf-red-deep: #9A0C23;
+            --maf-blue: #003D7A;
+            --maf-blue-deep: #002954;
+            --maf-orange: #E67E22;
+            --maf-green: #27AE60;
+            --maf-amber: #F4A300;
+            --maf-plum: #6B4F8F;
+
+            --paper: #FAF7F2;
+            --paper-deep: #F2EDE3;
+            --paper-line: #E5DDCC;
+            --ink: #1A1815;
+            --ink-soft: #3D3A35;
+            --ink-mute: #767068;
+
+            --bg-primary: var(--paper);
+            --bg-secondary: var(--paper-deep);
+            --bg-card: #FFFFFF;
+            --bg-card-hover: #FBF8F2;
+            --text-primary: var(--ink);
+            --text-secondary: var(--ink-soft);
+            --text-muted: var(--ink-mute);
+            --border-default: var(--paper-line);
+            --border-hover: #C4B89E;
+            --accent: var(--maf-red);
+
+            --tool-claude-bg: #FBEFE5;
+            --tool-claude-text: #8A4815;
+            --tool-claude-border: #E8C8A8;
+
+            --tool-chatgpt-bg: #E2F5EB;
+            --tool-chatgpt-text: #0F6B3F;
+            --tool-chatgpt-border: #B8E0CC;
+
+            --tool-codex-bg: #E8E4F4;
+            --tool-codex-text: #3B2C75;
+            --tool-codex-border: #C8C0E5;
+
+            --tool-copilot-bg: #DBE9F8;
+            --tool-copilot-text: #1C4D87;
+            --tool-copilot-border: #A8C2DF;
+
+            --t-xs: 0.75rem;
+            --t-sm: 0.875rem;
+            --t-base: 1rem;
+            --t-lg: 1.25rem;
+            --t-xl: clamp(1.5rem, 2.2vw + 0.5rem, 2.25rem);
+            --t-2xl: clamp(2rem, 3.5vw + 0.5rem, 3.5rem);
+            --t-display: clamp(2.8rem, 6vw + 1rem, 6.5rem);
+
+            --pad-x: clamp(1.25rem, 4vw, 3.5rem);
+            --section-gap: clamp(4rem, 8vw, 7rem);
+            --measure: 68ch;
+
+            --shadow-soft: 0 1px 0 rgba(26,24,21,0.06), 0 4px 14px rgba(26,24,21,0.04);
+            --shadow-lift: 0 2px 0 rgba(26,24,21,0.08), 0 12px 30px rgba(26,24,21,0.10);
+        }
+
+        [data-theme="dark"] {
+            --paper: #14110D;
+            --paper-deep: #1C1814;
+            --paper-line: #2F2A22;
+            --ink: #F2EDE0;
+            --ink-soft: #C9BFAA;
+            --ink-mute: #8A8175;
+
+            --bg-primary: var(--paper);
+            --bg-secondary: var(--paper-deep);
+            --bg-card: #1F1B16;
+            --bg-card-hover: #28231C;
+            --text-primary: var(--ink);
+            --text-secondary: var(--ink-soft);
+            --text-muted: var(--ink-mute);
+            --border-default: var(--paper-line);
+            --border-hover: #4A4234;
+
+            --tool-claude-bg: rgba(230, 126, 34, 0.16);
+            --tool-claude-text: #F0B97A;
+            --tool-claude-border: rgba(230, 126, 34, 0.34);
+
+            --tool-chatgpt-bg: rgba(39, 174, 96, 0.16);
+            --tool-chatgpt-text: #7CDD9F;
+            --tool-chatgpt-border: rgba(39, 174, 96, 0.34);
+
+            --tool-codex-bg: rgba(107, 79, 143, 0.22);
+            --tool-codex-text: #C8AFE0;
+            --tool-codex-border: rgba(107, 79, 143, 0.4);
+
+            --tool-copilot-bg: rgba(0, 61, 122, 0.22);
+            --tool-copilot-text: #95B7D9;
+            --tool-copilot-border: rgba(0, 61, 122, 0.4);
+
+            --shadow-soft: 0 1px 0 rgba(0,0,0,0.3), 0 4px 14px rgba(0,0,0,0.25);
+            --shadow-lift: 0 2px 0 rgba(0,0,0,0.4), 0 12px 30px rgba(0,0,0,0.45);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme]) {
+                --paper: #14110D;
+                --paper-deep: #1C1814;
+                --paper-line: #2F2A22;
+                --ink: #F2EDE0;
+                --ink-soft: #C9BFAA;
+                --ink-mute: #8A8175;
+                --bg-primary: var(--paper);
+                --bg-secondary: var(--paper-deep);
+                --bg-card: #1F1B16;
+                --bg-card-hover: #28231C;
+                --text-primary: var(--ink);
+                --text-secondary: var(--ink-soft);
+                --text-muted: var(--ink-mute);
+                --border-default: var(--paper-line);
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            overflow-x: hidden;
+            font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 1.0625rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            font-feature-settings: 'ss01', 'cv01';
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                radial-gradient(circle at 18% 12%, rgba(200, 16, 46, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 82% 78%, rgba(0, 61, 122, 0.035) 0%, transparent 45%);
+        }
+        [data-theme="dark"] body::before {
+            background-image:
+                radial-gradient(circle at 18% 12%, rgba(200, 16, 46, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 82% 78%, rgba(0, 61, 122, 0.06) 0%, transparent 45%);
+        }
+
+        main, header, footer, section { position: relative; z-index: 1; }
+
+        h1, h2, h3, .display, .pull-quote, .section-title, .step-title, .compare-title, .scene-title, .level-title, .check-title {
+            font-family: 'Fraunces', 'Source Serif Pro', Georgia, serif;
+            font-feature-settings: 'ss01', 'ss02', 'liga', 'kern';
+            letter-spacing: -0.01em;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        a:hover { color: var(--maf-red); }
+        ::selection { background: var(--maf-amber); color: var(--ink); }
+
+        code, .mono { font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; font-size: 0.92em; }
+
+        /* ─────────── THEME TOGGLE ─────────── */
+        .theme-toggle {
+            position: fixed;
+            top: 22px;
+            right: 22px;
+            z-index: 9999;
+            background: var(--ink);
+            color: var(--paper);
+            border: 1px solid var(--ink);
+            border-radius: 100px;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-lift);
+            transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1);
+        }
+        [data-theme="dark"] .theme-toggle {
+            background: var(--paper);
+            color: var(--ink);
+            border-color: var(--paper);
+        }
+        .theme-toggle:hover { transform: scale(1.06) rotate(-6deg); }
+
+        /* ─────────── REPORT HEADER ─────────── */
+        .report-header {
+            position: relative;
+            padding: clamp(3rem, 6vw, 5.5rem) var(--pad-x) clamp(3rem, 6vw, 5rem);
+            color: #F7F4ED;
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.78) 100%),
+                linear-gradient(135deg, var(--maf-blue-deep) 0%, #1A0E1E 100%);
+            overflow: hidden;
+        }
+        .report-header::before {
+            content: '';
+            position: absolute;
+            inset: -10% -5%;
+            background-image:
+                radial-gradient(ellipse at 20% 30%, rgba(200, 16, 46, 0.35) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 70%, rgba(244, 163, 0, 0.18) 0%, transparent 55%);
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        .report-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(115deg, transparent 0px, transparent 38px, rgba(255,255,255,0.025) 38px, rgba(255,255,255,0.025) 39px);
+            pointer-events: none;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+        .header-meta {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: rgba(247, 244, 237, 0.7);
+            margin-bottom: 0.85rem;
+        }
+        .header-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+            line-height: 0.98;
+            letter-spacing: -0.025em;
+            color: #F7F4ED;
+        }
+        .header-title em {
+            font-weight: 400;
+            font-style: italic;
+            color: var(--maf-amber);
+        }
+        .header-subtitle {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: rgba(247, 244, 237, 0.85);
+            margin-top: 0.75rem;
+            max-width: 60ch;
+        }
+        .header-divider {
+            margin: clamp(1.5rem, 3vw, 2rem) 0 1.25rem;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(247,244,237,0.4) 30%, rgba(247,244,237,0.4) 70%, transparent);
+        }
+        .header-byline {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.78rem;
+            color: rgba(247, 244, 237, 0.6);
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .header-byline span strong { color: rgba(247, 244, 237, 0.9); font-weight: 600; }
+
+        /* ─────────── MAIN ─────────── */
+        .report-main {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 var(--pad-x);
+        }
+
+        /* ─────────── TOC ─────────── */
+        .toc-nav {
+            margin: clamp(3rem, 6vw, 5rem) 0;
+            padding: clamp(2rem, 4vw, 3rem) 0;
+            border-top: 1px solid var(--border-default);
+            border-bottom: 1px solid var(--border-default);
+            position: relative;
+        }
+        .toc-nav::before {
+            content: 'INDEX';
+            position: absolute;
+            top: -0.6rem;
+            left: 0;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            color: var(--maf-red);
+            background: var(--bg-primary);
+            padding-right: 1rem;
+        }
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 0.4rem 2rem;
+        }
+        .toc-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            padding: 0.55rem 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            border-bottom: 1px dotted transparent;
+            transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+        }
+        .toc-item:hover {
+            color: var(--maf-red);
+            border-bottom-color: var(--maf-red);
+            transform: translateX(2px);
+        }
+        .toc-item .toc-num {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            min-width: 1.5rem;
+            text-align: right;
+        }
+        .toc-item:hover .toc-num { color: var(--maf-red); }
+
+        /* ─────────── SECTION & TITLE ─────────── */
+        .section {
+            margin: var(--section-gap) 0;
+            position: relative;
+        }
+        .section::before {
+            content: '';
+            display: block;
+            width: 48px;
+            height: 2px;
+            background: var(--maf-red);
+            margin-bottom: 1.5rem;
+        }
+        .section#hero::before { display: none; }
+
+        .section-eyebrow {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--maf-red);
+            margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(1.75rem, 3vw, 2.65rem);
+            line-height: 1.05;
+            letter-spacing: -0.022em;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-feature-settings: 'ss02';
+        }
+        .section-lead {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+            line-height: 1.5;
+            color: var(--text-secondary);
+            max-width: var(--measure);
+            margin-bottom: 2rem;
+        }
+        .section-body p {
+            max-width: var(--measure);
+            margin-bottom: 1.1rem;
+            color: var(--text-secondary);
+        }
+        .section-body p strong { color: var(--text-primary); }
+
+        /* ─────────── HERO ─────────── */
+        .section#hero {
+            margin-top: clamp(2rem, 4vw, 3rem);
+            margin-bottom: clamp(3rem, 6vw, 5rem);
+        }
+        .hero-deck {
+            position: relative;
+            min-height: clamp(400px, 60vh, 580px);
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(20,17,13,0.50) 0%, rgba(20,17,13,0.80) 100%),
+                linear-gradient(135deg, rgba(0,41,84,0.35) 0%, rgba(26,14,30,0.35) 100%),
+                url('maf-cockpit-hero.jpg');
+            background-size: cover, cover, cover;
+            background-position: center, center, center 42%;
+            color: #F7F4ED;
+            display: flex;
+            align-items: flex-end;
+            padding: clamp(2rem, 5vw, 4rem);
+        }
+        .hero-deck::before {
+            content: '';
+            position: absolute;
+            inset: -10% -5%;
+            background-image:
+                radial-gradient(ellipse at 75% 35%, rgba(244, 163, 0, 0.22) 0%, transparent 50%),
+                radial-gradient(ellipse at 25% 75%, rgba(200, 16, 46, 0.28) 0%, transparent 55%);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        .hero-deck::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(115deg, transparent 0px, transparent 38px, rgba(255,255,255,0.025) 38px, rgba(255,255,255,0.025) 39px);
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 36ch;
+        }
+        .hero-opener {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+            color: rgba(247, 244, 237, 0.85);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            border-left: 2px solid var(--maf-amber);
+            padding-left: 1rem;
+        }
+        .hero-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-size: var(--t-display);
+            line-height: 0.92;
+            letter-spacing: -0.035em;
+            color: #F7F4ED;
+            margin-bottom: 1.25rem;
+            font-feature-settings: 'ss02';
+        }
+        .hero-title em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--maf-amber);
+            display: inline-block;
+        }
+        .hero-sub {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(247, 244, 237, 0.7);
+        }
+        .hero-deck-credit {
+            position: absolute;
+            right: 1.5rem;
+            bottom: 1.25rem;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: rgba(247, 244, 237, 0.5);
+            font-variant-numeric: tabular-nums;
+            z-index: 2;
+        }
+
+        /* ─────────── EXEC GRID ─────────── */
+        .exec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0;
+            margin-bottom: 2rem;
+            border-top: 2px solid var(--ink);
+            border-bottom: 1px solid var(--border-default);
+        }
+        .exec-card {
+            padding: 1.75rem 1.5rem 1.5rem 0;
+            border-right: 1px solid var(--border-default);
+        }
+        .exec-card:last-child { border-right: none; padding-right: 0; }
+        .exec-card:nth-child(n+2) { padding-left: 1.5rem; }
+        .exec-number {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            color: var(--maf-red);
+            margin-bottom: 0.5rem;
+            font-feature-settings: 'ss02';
+        }
+        .exec-card:nth-child(2) .exec-number { color: var(--maf-blue); }
+        .exec-card:nth-child(3) .exec-number { color: var(--maf-plum); }
+        .exec-card:nth-child(4) .exec-number { color: var(--maf-orange); }
+        .exec-label {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: var(--text-secondary);
+            max-width: 24ch;
+        }
+        .exec-label strong { color: var(--text-primary); font-weight: 600; }
+        @media (max-width: 720px) {
+            .exec-grid { grid-template-columns: 1fr 1fr; }
+            .exec-card { border-right: none; padding: 1.25rem 0.75rem 1.25rem 0; }
+            .exec-card:nth-child(2n) { padding-left: 0.75rem; border-left: 1px solid var(--border-default); }
+            .exec-card { border-bottom: 1px solid var(--border-default); }
+        }
+
+        /* ─────────── KERN — DRIE BOUWSTENEN ─────────── */
+        .kern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0 1rem;
+        }
+        .kern-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            padding: 2rem 1.75rem;
+            position: relative;
+            transition: transform 0.18s, box-shadow 0.18s;
+            box-shadow: var(--shadow-soft);
+        }
+        .kern-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+        .kern-card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .kern-card-label {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--maf-red);
+            margin-bottom: 0.5rem;
+        }
+        .kern-card-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        .kern-card-body {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        .kern-card-body strong { color: var(--text-primary); }
+        .kern-card-bullet {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--maf-red);
+            color: var(--text-primary);
+        }
+        .kern-card:nth-child(2) .kern-card-bullet { border-left-color: var(--maf-blue); }
+        .kern-card:nth-child(2) .kern-card-label { color: var(--maf-blue); }
+        .kern-card:nth-child(3) .kern-card-bullet { border-left-color: var(--maf-orange); }
+        .kern-card:nth-child(3) .kern-card-label { color: var(--maf-orange); }
+
+        /* ─────────── DEMO LIVE — SCENES ─────────── */
+        .scenes {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .scene {
+            display: grid;
+            grid-template-columns: 90px 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-default);
+            align-items: start;
+        }
+        .scene:last-child { border-bottom: 1px solid var(--border-default); }
+        .scene-num {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 3rem;
+            line-height: 1;
+            color: var(--maf-red);
+            font-feature-settings: 'ss02';
+        }
+        .scene-body { }
+        .scene-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: 1.4rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .scene-meta {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .scene-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: var(--measure);
+        }
+        .scene-text + .scene-text { margin-top: 0.75rem; }
+        .scene-text code {
+            background: var(--bg-secondary);
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            color: var(--text-primary);
+        }
+        @media (max-width: 640px) {
+            .scene { grid-template-columns: 1fr; gap: 0.5rem; }
+            .scene-num { font-size: 2rem; }
+        }
+
+        /* ─────────── MAPPING TABEL ─────────── */
+        .mapping {
+            margin-top: 1.5rem;
+            border-top: 2px solid var(--ink);
+        }
+        .mapping-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-bottom: 1px solid var(--border-default);
+            transition: background 0.15s;
+        }
+        .mapping-row:hover { background: var(--bg-secondary); }
+        .mapping-row.is-header {
+            border-bottom: 1px solid var(--ink);
+        }
+        .mapping-cell {
+            padding: 1rem 1.25rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .mapping-cell:first-child {
+            border-right: 1px solid var(--border-default);
+            background: var(--bg-secondary);
+        }
+        .is-header .mapping-cell {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--text-primary);
+            padding: 0.85rem 1.25rem;
+        }
+        .mapping-cell strong { color: var(--text-primary); font-weight: 600; }
+        .mapping-cell .mapping-note {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+        @media (max-width: 640px) {
+            .mapping-row { grid-template-columns: 1fr; }
+            .mapping-cell:first-child { border-right: none; border-bottom: 1px solid var(--border-default); }
+        }
+
+        /* ─────────── LEVELS — BOUWPLAN ─────────── */
+        .levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .level {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        .level::before {
+            content: attr(data-levelnum);
+            position: absolute;
+            top: -1.5rem;
+            right: -0.5rem;
+            font-family: 'Fraunces', serif;
+            font-weight: 200;
+            font-style: italic;
+            font-size: 9rem;
+            line-height: 0.85;
+            color: var(--maf-red);
+            opacity: 0.08;
+            pointer-events: none;
+            font-feature-settings: 'ss02';
+        }
+        .level:nth-child(2)::before { color: var(--maf-blue); }
+        .level:nth-child(3)::before { color: var(--maf-plum); }
+        [data-theme="dark"] .level::before { opacity: 0.18; }
+
+        .level-meta {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--maf-red);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .level:nth-child(2) .level-meta { color: var(--maf-blue); }
+        .level:nth-child(3) .level-meta { color: var(--maf-plum); }
+
+        .level-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .level-time {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
+        }
+        .level-list {
+            list-style: none;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .level-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px dotted var(--border-default);
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 0.5rem;
+        }
+        .level-list li:last-child { border-bottom: none; }
+        .level-list li::before {
+            content: '→';
+            color: var(--maf-red);
+            font-weight: 600;
+        }
+        .level:nth-child(2) .level-list li::before { color: var(--maf-blue); }
+        .level:nth-child(3) .level-list li::before { color: var(--maf-plum); }
+        .level-list li strong { color: var(--text-primary); }
+
+        /* ─────────── COMPARISON ─────────── */
+        .compare-wrap {
+            margin-top: 1.5rem;
+            overflow-x: auto;
+        }
+        .compare-table {
+            width: 100%;
+            min-width: 760px;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+        .compare-table th, .compare-table td {
+            text-align: left;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border-default);
+            vertical-align: top;
+        }
+        .compare-table th {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--ink);
+            background: var(--bg-secondary);
+        }
+        .compare-table th:first-child { background: var(--ink); color: var(--paper); }
+        [data-theme="dark"] .compare-table th:first-child { background: var(--paper); color: var(--ink); }
+        .compare-table tbody tr:hover { background: var(--bg-secondary); }
+        .compare-table td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-default);
+        }
+        .badge-score {
+            display: inline-block;
+            padding: 0.15rem 0.55rem;
+            border-radius: 100px;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .score-best { background: var(--maf-green); color: #fff; }
+        .score-good { background: var(--maf-amber); color: var(--ink); }
+        .score-meh { background: var(--paper-line); color: var(--ink-soft); }
+        .score-no { background: transparent; color: var(--text-muted); border: 1px dashed var(--border-hover); }
+        [data-theme="dark"] .score-meh { background: var(--paper-line); color: var(--text-secondary); }
+
+        /* ─────────── TOOL BADGE ─────────── */
+        .tool-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            padding: 0.3rem 0.7rem;
+            border-radius: 100px;
+            border: 1px solid;
+        }
+        .tool-claude { background: var(--tool-claude-bg); color: var(--tool-claude-text); border-color: var(--tool-claude-border); }
+        .tool-chatgpt { background: var(--tool-chatgpt-bg); color: var(--tool-chatgpt-text); border-color: var(--tool-chatgpt-border); }
+        .tool-codex { background: var(--tool-codex-bg); color: var(--tool-codex-text); border-color: var(--tool-codex-border); }
+        .tool-copilot { background: var(--tool-copilot-bg); color: var(--tool-copilot-text); border-color: var(--tool-copilot-border); }
+
+        /* ─────────── CODEX SCENARIOS ─────────── */
+        .codex-scenarios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .codex-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-left: 3px solid var(--maf-plum);
+            box-shadow: var(--shadow-soft);
+        }
+        .codex-card-tag {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.66rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--maf-plum);
+            margin-bottom: 0.5rem;
+        }
+        .codex-card-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.25;
+        }
+        .codex-card-body {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        /* ─────────── COPILOT BLOK ─────────── */
+        .copilot-block {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-default);
+            border-left: 4px solid var(--maf-blue);
+        }
+        .copilot-block-side {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            line-height: 1.15;
+            color: var(--maf-blue);
+        }
+        .copilot-block-side em {
+            font-style: italic;
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-top: 0.5rem;
+            font-family: 'Instrument Sans', sans-serif;
+            letter-spacing: 0.08em;
+        }
+        .copilot-block-main p {
+            margin-bottom: 0.85rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .copilot-block-main strong { color: var(--text-primary); }
+        @media (max-width: 720px) {
+            .copilot-block { grid-template-columns: 1fr; }
+        }
+
+        /* ─────────── CHECKLIST ─────────── */
+        .checklist {
+            margin-top: 1.5rem;
+            display: grid;
+            gap: 0.75rem;
+        }
+        .check-item {
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            box-shadow: var(--shadow-soft);
+            align-items: start;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .check-item:hover { transform: translateX(3px); box-shadow: var(--shadow-lift); }
+        .check-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--maf-red);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--maf-red);
+            font-weight: 700;
+            font-size: 1rem;
+            background: var(--bg-card);
+        }
+        .check-body { }
+        .check-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            line-height: 1.25;
+        }
+        .check-detail {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .check-detail code {
+            background: var(--bg-secondary);
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+        }
+
+        /* ─────────── PULL QUOTE ─────────── */
+        .pull-quote {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+            line-height: 1.25;
+            color: var(--text-primary);
+            max-width: 36ch;
+            margin: clamp(2rem, 4vw, 3rem) auto;
+            padding: 1.5rem 0 1.5rem 1.5rem;
+            border-left: 3px solid var(--maf-red);
+            text-align: left;
+        }
+        .pull-quote-attr {
+            display: block;
+            font-style: normal;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        /* ─────────── FOOTER ─────────── */
+        .report-footer {
+            margin-top: var(--section-gap);
+            padding: clamp(3rem, 5vw, 4rem) var(--pad-x);
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-default);
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            text-align: center;
+        }
+        .report-footer strong { color: var(--text-primary); }
+        .report-footer-line {
+            display: block;
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        /* ─────────── PROGRESSIE-RAIL ─────────── */
+        .progress-rail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: transparent;
+            z-index: 9998;
+            pointer-events: none;
+        }
+        .progress-rail-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--maf-red) 0%, var(--maf-amber) 50%, var(--maf-blue) 100%);
+            transition: width 0.1s ease-out;
+        }
+
+        /* ─────────── INLINE-FLOW VOOR HANDOFF ─────────── */
+        .handoff {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.88rem;
+        }
+        .handoff-node {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-default);
+            background: var(--bg-card);
+            border-radius: 4px;
+            font-weight: 500;
+            box-shadow: var(--shadow-soft);
+        }
+        .handoff-arrow {
+            color: var(--maf-red);
+            font-weight: 700;
+        }
+
+        /* ─────────── KLEUR-NUANCE PILLAR ─────────── */
+        .pillar-strip {
+            display: flex;
+            gap: 0;
+            margin: 1.5rem 0;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+        .pillar-strip span {
+            flex: 1;
+            padding: 0.65rem 0.75rem;
+            text-align: center;
+            color: #fff;
+        }
+        .pillar-strip span:nth-child(1) { background: var(--maf-red); }
+        .pillar-strip span:nth-child(2) { background: var(--maf-plum); }
+        .pillar-strip span:nth-child(3) { background: var(--maf-orange); }
+        .pillar-strip span:nth-child(4) { background: var(--maf-green); }
+
+        /* ─────────── GRAFIEKEN ─────────── */
+        .chart-wrap {
+            position: relative;
+            background: transparent;
+        }
+        .chart-caption {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            max-width: 60ch;
+            margin: 0 auto 1.25rem;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* ─────────── PARITEIT-MATRIX ─────────── */
+        .parity {
+            margin-top: 1.5rem;
+            border-top: 2px solid var(--ink);
+            border-bottom: 1px solid var(--border-default);
+        }
+        .parity-row {
+            display: grid;
+            grid-template-columns: 1fr 90px 90px;
+            align-items: center;
+            border-bottom: 1px solid var(--border-default);
+        }
+        .parity-row:last-child { border-bottom: none; }
+        .parity-row.is-header .parity-cell {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-primary);
+        }
+        .parity-row.is-header { border-bottom: 1px solid var(--ink); }
+        .parity-cell {
+            padding: 0.8rem 1rem;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+        .parity-cell.feat { color: var(--text-primary); font-weight: 500; }
+        .parity-cell.mark { text-align: center; font-weight: 700; }
+        .parity-cell.mark span {
+            display: inline-flex;
+            width: 26px; height: 26px;
+            align-items: center; justify-content: center;
+            border-radius: 100px;
+            background: var(--maf-green); color: #fff;
+            font-size: 0.85rem;
+        }
+        .parity-col-codex { background: var(--tool-codex-bg); }
+        .parity-col-claude { background: var(--tool-claude-bg); }
+        @media (max-width: 560px) {
+            .parity-row { grid-template-columns: 1fr 64px 64px; }
+            .parity-cell { padding: 0.65rem 0.5rem; font-size: 0.82rem; }
+        }
+
+        /* ─────────── PRINT ─────────── */
+        @media print {
+            .theme-toggle, .progress-rail { display: none; }
+            body { background: white; color: black; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- progressie-rail -->
+<div class="progress-rail"><div class="progress-rail-fill" id="progressFill"></div></div>
+
+<!-- theme toggle -->
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Wissel licht/donker">☀️</button>
+
+<!-- HEADER -->
+<header class="report-header">
+    <div class="header-content">
+        <div class="header-meta">Workshop · 20 mei · MAF Nederland · Marketing-afdeling</div>
+        <h1 class="header-title">Eén Marketeer.<br>Vele <em>Agents</em>.<br>Eén Stack.</h1>
+        <p class="header-subtitle">Hoe een marketing-team zonder code een orchestratie-stack bouwt in de tools die jullie al hebben: ChatGPT Business, Codex en Office Copilot eerlijk naast elkaar.</p>
+        <hr class="header-divider">
+        <div class="header-byline">
+            <span><strong>Door</strong> Rik Goedhart</span>
+            <span><strong>Voor</strong> MAF Marketing-team</span>
+            <span><strong>Duur</strong> 60-90 min sessie</span>
+            <span><strong>Doel</strong> morgen kunnen jullie het zelf</span>
+        </div>
+    </div>
+</header>
+
+<main class="report-main">
+
+    <!-- HERO -->
+    <section class="section" id="hero">
+        <div class="hero-deck">
+            <div class="hero-content">
+                <p class="hero-opener">"De toekomst van marketing is niet dat één AI alles doet. Het is dat één marketeer een team van AI's <em>regisseert</em>."</p>
+                <h2 class="hero-title">Geen<br>nieuwe tool.<br><em>Een nieuwe</em><br>werkwijze.</h2>
+                <p class="hero-sub">Een doorlopende presentatie · scroll om verder te lezen</p>
+            </div>
+            <div class="hero-deck-credit">workshop · maf · 20 mei</div>
+        </div>
+    </section>
+
+    <!-- TOC -->
+    <nav class="toc-nav">
+        <div class="toc-grid">
+            <a class="toc-item" href="#executive"><span class="toc-num">01</span><span>Vier kern-takeaways</span></a>
+            <a class="toc-item" href="#kern"><span class="toc-num">02</span><span>De kern: orchestratie</span></a>
+            <a class="toc-item" href="#claude"><span class="toc-num">03</span><span>Live in Claude Code</span></a>
+            <a class="toc-item" href="#chatgpt"><span class="toc-num">04</span><span>Het kan ook in ChatGPT</span></a>
+            <a class="toc-item" href="#bouwplan"><span class="toc-num">05</span><span>Bouwplan in drie niveaus</span></a>
+            <a class="toc-item" href="#vergelijking"><span class="toc-num">06</span><span>Eerlijke vergelijking</span></a>
+            <a class="toc-item" href="#codex"><span class="toc-num">07</span><span>Codex CLI: de tweeling</span></a>
+            <a class="toc-item" href="#copilot"><span class="toc-num">08</span><span>Office Copilot</span></a>
+            <a class="toc-item" href="#morgen"><span class="toc-num">09</span><span>Morgen beginnen</span></a>
+        </div>
+    </nav>
+
+    <!-- 01 — EXECUTIVE -->
+    <section class="section" id="executive">
+        <div class="section-eyebrow">01 · Executive summary</div>
+        <h2 class="section-title">Vier dingen die je vanavond onthoudt.</h2>
+        <p class="section-lead">Een AI-stack voor marketing draait niet om welke chatbot het slimst is. Het draait om hoe je de specialisten samenbrengt.</p>
+
+        <div class="exec-grid">
+            <div class="exec-card">
+                <div class="exec-number">1.</div>
+                <p class="exec-label"><strong>Ja, het kan zonder code.</strong> ChatGPT Business biedt alle bouwstenen voor een orchestratie-stack. Geen terminal, geen Python.</p>
+            </div>
+            <div class="exec-card">
+                <div class="exec-number">2.</div>
+                <p class="exec-label"><strong>Projects + Custom GPTs</strong> zijn jullie hoofdagent en specialisten. Memory en Apps (de nieuwe naam voor connectors) zijn de lijm.</p>
+            </div>
+            <div class="exec-card">
+                <div class="exec-number">3.</div>
+                <p class="exec-label"><strong>Codex CLI evenaart Claude Code.</strong> Lokaal, met MCP, hooks en subagents. Het verschil is model-voorkeur, geen capaciteitskloof.</p>
+            </div>
+            <div class="exec-card">
+                <div class="exec-number">4.</div>
+                <p class="exec-label"><strong>Begin morgen.</strong> Een Project + drie Custom GPTs is in een uur opgezet en werkt direct mee.</p>
+            </div>
+        </div>
+
+        <p class="pull-quote">
+            Wat ik bij Rik in Claude Code laat zien, is geen toverdoos. Het is een werkwijze. En die werkwijze is overdraagbaar.
+            <span class="pull-quote-attr">Workshop-opzet</span>
+        </p>
+    </section>
+
+    <!-- 02 — KERN -->
+    <section class="section" id="kern">
+        <div class="section-eyebrow">02 · De kern</div>
+        <h2 class="section-title">Drie bouwstenen die elke AI-stack heeft.</h2>
+        <p class="section-lead">Of je nu in Claude Code, ChatGPT of zelfs Office Copilot werkt: onder de motorkap zit altijd dezelfde structuur. Wie de structuur snapt, kiest niet meer op merk, maar op fit.</p>
+
+        <div class="kern-grid">
+            <article class="kern-card">
+                <span class="kern-card-icon">🧠</span>
+                <div class="kern-card-label">Bouwsteen 1</div>
+                <h3 class="kern-card-title">De Hoofdagent</h3>
+                <p class="kern-card-body">De regisseur. Kent het project, kent de tone, kent de pijlers. Vangt de vraag op, bepaalt wie het werk doet, controleert het resultaat. Bij mij heet hij <strong>Mark</strong>.</p>
+                <div class="kern-card-bullet">In ChatGPT: een Project met systeemprompt.</div>
+            </article>
+
+            <article class="kern-card">
+                <span class="kern-card-icon">⚙️</span>
+                <div class="kern-card-label">Bouwsteen 2</div>
+                <h3 class="kern-card-title">De Specialisten</h3>
+                <p class="kern-card-body">Sub-agents met scherp afgebakende rollen: copywriter, factchecker, keyword-onderzoeker, verhalen-editor, brand-reviewer. Eén taak, één expertise, één kwaliteitslat.</p>
+                <div class="kern-card-bullet">In ChatGPT: Custom GPTs.</div>
+            </article>
+
+            <article class="kern-card">
+                <span class="kern-card-icon">🔌</span>
+                <div class="kern-card-label">Bouwsteen 3</div>
+                <h3 class="kern-card-title">Het Gereedschap</h3>
+                <p class="kern-card-body">Verbindingen naar de echte wereld: Google Drive, Search Console, een database, een API. Zonder gereedschap blijft het bij praten. Met gereedschap wordt het werk.</p>
+                <div class="kern-card-bullet">In ChatGPT: Apps (MCP) en Actions.</div>
+            </article>
+        </div>
+
+        <div class="handoff">
+            <span class="handoff-node">Vraag van marketeer</span>
+            <span class="handoff-arrow">→</span>
+            <span class="handoff-node">Hoofdagent regisseert</span>
+            <span class="handoff-arrow">→</span>
+            <span class="handoff-node">Specialisten leveren</span>
+            <span class="handoff-arrow">→</span>
+            <span class="handoff-node">Gereedschap publiceert</span>
+        </div>
+    </section>
+
+    <!-- 03 — CLAUDE CODE LIVE -->
+    <section class="section" id="claude">
+        <div class="section-eyebrow">03 · Wat je vandaag ziet</div>
+        <h2 class="section-title">Drie scenes uit Claude Code: kijk vooral naar wát er gebeurt, niet hoe.</h2>
+        <p class="section-lead">Ik laat drie momenten zien. Niet om jullie aan deze tool te binden, maar om de werkwijze tastbaar te maken. Bij elke scene: vraag jezelf af welke bouwsteen je ziet.</p>
+
+        <div class="scenes">
+            <div class="scene">
+                <div class="scene-num">i.</div>
+                <div class="scene-body">
+                    <div class="scene-meta">Bouwsteen 1 · de regisseur</div>
+                    <h3 class="scene-title">Mark krijgt een briefing en bedenkt zelf wie het werk doet.</h3>
+                    <p class="scene-text">Ik typ: <em>"Mark, schrijf een blogartikel over de Runway Run voor potentiële deelnemers."</em> Mark leest de project-context, kijkt naar wie er hierin gespecialiseerd is, en stuurt de keyword-onderzoeker en de copywriter parallel op pad, met aparte briefings.</p>
+                    <p class="scene-text">Niets wat Mark doet, is exclusief. In de ChatGPT-GUI chain je de specialisten met @mentions. En in Codex CLI, de terminal-versie binnen ChatGPT, leest een hoofdagent net als hier <strong>lokaal de projectbestanden</strong> en stuurt hij <strong>subagents</strong> aan. Dezelfde werkwijze, ander merk.</p>
+                </div>
+            </div>
+
+            <div class="scene">
+                <div class="scene-num">ii.</div>
+                <div class="scene-body">
+                    <div class="scene-meta">Bouwsteen 2 · de specialist</div>
+                    <h3 class="scene-title">De copywriter werkt strikt volgens MAF-stem en weigert jaartallen.</h3>
+                    <p class="scene-text">De copywriter-agent heeft één taak: schrijven in MAF-toon. Hij kent de vier pijlers, de blacklist van Nederlandse AI-tics, de regel <em>geen em-dashes in koppen</em>, de eis dat externe links 200 OK zijn. Hij weigert wat niet mag, en levert wat wel kan.</p>
+                    <p class="scene-text">Dit is exact wat een Custom GPT in ChatGPT ook doet. Zelfde principe, andere doos.</p>
+                </div>
+            </div>
+
+            <div class="scene">
+                <div class="scene-num">iii.</div>
+                <div class="scene-body">
+                    <div class="scene-meta">Bouwsteen 3 · het gereedschap</div>
+                    <h3 class="scene-title">Het artikel verschijnt direct als concept in WordPress.</h3>
+                    <p class="scene-text">Geen copy-paste, geen tussenstap. De tooling-laag publiceert direct, met featured image, meta-titel, schema-markup, juiste categorie. Diezelfde laag haalt ook Search Console-data op om te zien hoe een eerder artikel scoort.</p>
+                    <p class="scene-text">Vroeger was dit het exclusieve domein van Claude Code. Niet meer. In de ChatGPT-GUI doe je dit via een WordPress-app en een Search Console-connector. In Codex CLI via exact dezelfde WordPress- en GSC-MCP-servers als hier. Het kan dus in alle drie. De koppelingen staan kant en klaar op GitHub.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04 — IN CHATGPT -->
+    <section class="section" id="chatgpt">
+        <div class="section-eyebrow">04 · Voor jullie team</div>
+        <h2 class="section-title">Dezelfde stack, in het ChatGPT-ecosysteem.</h2>
+        <p class="section-lead">Wat je net zag, kunnen jullie opzetten in ChatGPT. Twee ingangen: de GUI (geen code, voor het hele team) en Codex CLI (terminal, voor één technische collega). De namen verschillen. Het idee is hetzelfde.</p>
+
+        <div class="mapping">
+            <div class="mapping-row is-header">
+                <div class="mapping-cell">Wat ik gebruik in Claude Code</div>
+                <div class="mapping-cell">In het ChatGPT-ecosysteem (GUI én Codex CLI)</div>
+            </div>
+            <div class="mapping-row">
+                <div class="mapping-cell"><strong>Project met CLAUDE.md</strong><span class="mapping-note">Vaste context, tone-of-voice, pijlers, conventies</span></div>
+                <div class="mapping-cell"><strong>Project</strong> (GUI) · <strong>AGENTS.md</strong> (Codex CLI)<span class="mapping-note">Systeemprompt + knowledge files + memory; AGENTS.md is de directe tegenhanger van CLAUDE.md</span></div>
+            </div>
+            <div class="mapping-row">
+                <div class="mapping-cell"><strong>Sub-agents</strong> (Mark, copywriter, factcheck, art-director)<span class="mapping-note">Elk een eigen rol, eigen geheugen, eigen briefingsregels</span></div>
+                <div class="mapping-cell"><strong>Custom GPTs</strong><span class="mapping-note">Eigen systeemprompt + knowledge-files + tools per GPT</span></div>
+            </div>
+            <div class="mapping-row">
+                <div class="mapping-cell"><strong>Task-tool</strong> (parallelle aanroep)<span class="mapping-note">Mark stuurt 3 specialisten tegelijk op pad</span></div>
+                <div class="mapping-cell">GUI: <strong>@mention</strong> (sequentieel) · Codex CLI: <strong>subagents</strong><span class="mapping-note">In Codex CLI net als hier parallel; in de GUI één voor één</span></div>
+            </div>
+            <div class="mapping-row">
+                <div class="mapping-cell"><strong>MCP-tools</strong> (WordPress, GSC, GA4, Ads, DataForSEO)<span class="mapping-note">Tientallen tools direct beschikbaar</span></div>
+                <div class="mapping-cell"><strong>Apps</strong> (MCP-connectors) · Codex: <strong>MCP in config.toml</strong><span class="mapping-note">Dezelfde servers: WordPress, GA4, Ads, GSC, DataForSEO. Kant en klaar op GitHub.</span></div>
+            </div>
+            <div class="mapping-row">
+                <div class="mapping-cell"><strong>Skills</strong> (kennisbestanden voor agents)<span class="mapping-note">Lange referenties die agents zelf inladen</span></div>
+                <div class="mapping-cell"><strong>Knowledge files</strong> (GUI) · <strong>Skills + Plugins</strong> (Codex CLI)<span class="mapping-note">GUI: PDF/MD/DOCX/TXT die de GPT doorzoekt. Codex CLI heeft echte Skills, plus 90+ plugins.</span></div>
+            </div>
+            <div class="mapping-row">
+                <div class="mapping-cell"><strong>Memory-architectuur</strong> (auto-loaded per project)<span class="mapping-note">CLAUDE.md, MEMORY.md, site-feiten.md</span></div>
+                <div class="mapping-cell"><strong>Memory</strong> (per account + per project)<span class="mapping-note">Onthoudt feiten tussen gesprekken; opt-in</span></div>
+            </div>
+            <div class="mapping-row">
+                <div class="mapping-cell"><strong>Bash + Read/Edit/Write</strong> lokaal<span class="mapping-note">Direct lokaal filesysteem</span></div>
+                <div class="mapping-cell">GUI: <strong>Code Interpreter</strong> (sandbox) · Codex CLI: <strong>lokaal lezen/wijzigen/uitvoeren</strong><span class="mapping-note">Codex CLI werkt net als hier op je eigen mappen; de GUI in een cloud-sandbox</span></div>
+            </div>
+            <div class="mapping-row">
+                <div class="mapping-cell"><strong>Hooks</strong> (deny-regels, protocol-handhaving)<span class="mapping-note">SessionStart, PreToolUse, PostToolUse, Stop ...</span></div>
+                <div class="mapping-cell">Codex CLI: <strong>Hooks</strong> (identiek)<span class="mapping-note">Dezelfde events: SessionStart, PreToolUse, PermissionRequest, PostToolUse, UserPromptSubmit, Stop. GUI heeft dit niet.</span></div>
+            </div>
+        </div>
+
+        <p class="pull-quote">
+            De architectuur is overdraagbaar. Niet één-op-één gelijk, maar dezelfde manier van denken werkt.
+        </p>
+
+        <h3 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(1.4rem,2.4vw,1.9rem); margin-top:1rem; color:var(--text-primary); letter-spacing:-0.02em;">De marketing-koppelingen die klaarstaan</h3>
+        <p class="section-body" style="color:var(--text-secondary); max-width:var(--measure); margin-bottom:1.25rem;">Deze MCP-servers werken zowel in de ChatGPT-GUI (als app) als in Codex CLI én Claude Code. De meeste zijn officieel; de rest is open source op GitHub.</p>
+        <div class="compare-wrap">
+            <table class="compare-table" style="min-width:680px;">
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Connector</th>
+                        <th>Toegang</th>
+                        <th>Waar te vinden</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>WordPress</td>
+                        <td>Officieel (WordPress.com) + community (Respira, 187+ tools)</td>
+                        <td><span class="badge-score score-best">Lezen + schrijven</span></td>
+                        <td>WordPress.com / GitHub</td>
+                    </tr>
+                    <tr>
+                        <td>Google Analytics 4</td>
+                        <td>Officieel (Google)</td>
+                        <td><span class="badge-score score-good">Alleen lezen</span></td>
+                        <td>GitHub (Google)</td>
+                    </tr>
+                    <tr>
+                        <td>Search Console</td>
+                        <td>Community (incl. variant met Bing WMT + GA4)</td>
+                        <td><span class="badge-score score-good">Alleen lezen</span></td>
+                        <td>GitHub</td>
+                    </tr>
+                    <tr>
+                        <td>Google Ads</td>
+                        <td>Officieel (googleads)</td>
+                        <td><span class="badge-score score-good">Alleen lezen</span></td>
+                        <td>GitHub (googleads)</td>
+                    </tr>
+                    <tr>
+                        <td>DataForSEO</td>
+                        <td>Officieel (TypeScript)</td>
+                        <td><span class="badge-score score-best">Volledige SEO-data</span></td>
+                        <td>GitHub (dataforseo)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 05 — BOUWPLAN -->
+    <section class="section" id="bouwplan">
+        <div class="section-eyebrow">05 · Concreet bouwplan</div>
+        <h2 class="section-title">Drie niveaus. Van vandaag tot deze maand.</h2>
+        <p class="section-lead">Niet alles tegelijk. Begin met niveau één, kom over een week terug, en zet niveau twee op. Niveau drie is voor wie wil doorpakken.</p>
+
+        <div class="levels">
+            <article class="level" data-levelnum="1">
+                <div class="level-meta">Niveau 1 · de basis</div>
+                <h3 class="level-title">Vandaag: één Project</h3>
+                <div class="level-time">15 minuten werk</div>
+                <ul class="level-list">
+                    <li><span>Maak een <strong>Project</strong> "MAF Marketing" in ChatGPT.</span></li>
+                    <li><span>Plak een <strong>systeemprompt</strong>: vier pijlers, tone-of-voice, geen jaartallen, geen em-dashes, christelijke conventies, doelgroep-overzicht.</span></li>
+                    <li><span>Upload als knowledge files: <strong>llms.txt</strong>, <strong>01_Profiel.txt</strong>, <strong>04_Stem_Persoonlijkheid.txt</strong>.</span></li>
+                    <li><span>Zet <strong>Memory</strong> aan en prim het met: KvK 41231129, ANBI 805245352, IBAN, tagline "Vliegen voor Leven", de vier pijlers.</span></li>
+                    <li><span><strong>Test:</strong> typ <em>"schrijf een korte introductie voor onze nieuwsbrief over de Runway Run"</em> en kijk of het in MAF-toon komt.</span></li>
+                </ul>
+            </article>
+
+            <article class="level" data-levelnum="2">
+                <div class="level-meta">Niveau 2 · de specialisten</div>
+                <h3 class="level-title">Deze week: zes Custom GPTs</h3>
+                <div class="level-time">1-2 uur werk</div>
+                <ul class="level-list">
+                    <li><span><strong>MAF Copywriter</strong>: schrijft in MAF-stem, kent de pijlers, gebruikt nooit jaartallen.</span></li>
+                    <li><span><strong>MAF Verhalen-Editor</strong>: structureert donor-stories volgens probleem, vlucht, impact, CTA.</span></li>
+                    <li><span><strong>MAF Pijler-Classifier</strong>: welke pijler past bij dit verhaal, deze campagne, dit keyword?</span></li>
+                    <li><span><strong>MAF Factcheck</strong>: controleert tegen vaste feiten, signaleert claims die bronnen nodig hebben.</span></li>
+                    <li><span><strong>MAF Brand Reviewer</strong>: leest concept, geeft tone/CTA/jaartallen-check, scoort 1-10.</span></li>
+                    <li><span><strong>MAF Donateur-Psycholoog</strong>: beoordeelt of deze copy converteert, vermijdt bevoogding, concretiseert impact.</span></li>
+                </ul>
+            </article>
+
+            <article class="level" data-levelnum="3">
+                <div class="level-meta">Niveau 3 · het gereedschap</div>
+                <h3 class="level-title">Deze maand: apps en MCP</h3>
+                <div class="level-time">4-6 uur werk</div>
+                <ul class="level-list">
+                    <li><span><strong>DataForSEO-app</strong> aan een GPT koppelen voor live zoekvolumes en concurrentie in de NL-markt.</span></li>
+                    <li><span><strong>GA4, Search Console en Google Ads</strong> koppelen via de officiële MCP-apps (read-only) zodat een GPT jullie eigen cijfers leest.</span></li>
+                    <li><span><strong>WordPress-app</strong> koppelen om concepten direct vanuit ChatGPT klaar te zetten in jullie CMS.</span></li>
+                    <li><span><strong>Apps aanzetten</strong>: Google Drive (briefings), SharePoint (huisstijl), Outlook (mail-drafts).</span></li>
+                    <li><span><strong>Bonus voor de techneut:</strong> probeer Codex CLI met de WordPress-MCP en publiceer een testpagina vanuit de terminal.</span></li>
+                </ul>
+            </article>
+        </div>
+
+        <div class="chart-wrap" style="max-width: 640px; margin: 2.5rem 0;">
+            <canvas id="bouwplanChart" height="220" aria-label="Horizontale bar-grafiek: tijdsinvestering per niveau" role="img"></canvas>
+        </div>
+
+        <div class="pillar-strip">
+            <span>Medisch</span>
+            <span>Zending</span>
+            <span>Noodhulp</span>
+            <span>Ontwikkeling</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; text-align: center; margin-top: -0.5rem;">Alle copy uit alle agents ankert op één van de vier pijlers. Dat is wat de Pijler-Classifier bewaakt.</p>
+    </section>
+
+    <!-- 06 — VERGELIJKING -->
+    <section class="section" id="vergelijking">
+        <div class="section-eyebrow">06 · Eerlijke vergelijking</div>
+        <h2 class="section-title">Welke tool is sterk waarin, zonder verkooppraat.</h2>
+        <p class="section-lead">Geen tool is overal de beste. Hieronder per veelvoorkomende marketingtaak: wie wint, wie kan, wie laat het liever liggen.</p>
+
+        <div class="compare-wrap">
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Taak</th>
+                        <th><span class="tool-badge tool-chatgpt">ChatGPT GUI</span></th>
+                        <th><span class="tool-badge tool-codex">Codex CLI</span></th>
+                        <th><span class="tool-badge tool-claude">Claude Code</span></th>
+                        <th><span class="tool-badge tool-copilot">Office Copilot</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Donateurverhaal schrijven in MAF-toon</td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-meh">Matig</span></td>
+                    </tr>
+                    <tr>
+                        <td>Keyword-onderzoek NL-markt (DataForSEO MCP)</td>
+                        <td><span class="badge-score score-good">Via app</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-no">N.v.t.</span></td>
+                    </tr>
+                    <tr>
+                        <td>Brand-review op tone, CTA, jaartallen</td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-meh">Matig</span></td>
+                    </tr>
+                    <tr>
+                        <td>Direct publiceren in WordPress (MCP)</td>
+                        <td><span class="badge-score score-good">Via app</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-no">N.v.t.</span></td>
+                    </tr>
+                    <tr>
+                        <td>Beelden genereren voor social</td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-meh">Matig</span></td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-meh">Designer-app</span></td>
+                    </tr>
+                    <tr>
+                        <td>Search Console / GA4 analyseren (MCP)</td>
+                        <td><span class="badge-score score-good">Via app</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-no">N.v.t.</span></td>
+                    </tr>
+                    <tr>
+                        <td>Google Ads-data analyseren (MCP)</td>
+                        <td><span class="badge-score score-good">Via app</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-no">N.v.t.</span></td>
+                    </tr>
+                    <tr>
+                        <td>Vergaderverslag uit Teams-opname</td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-no">N.v.t.</span></td>
+                        <td><span class="badge-score score-meh">Handmatig</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mail-draft in Outlook-stijl</td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-no">N.v.t.</span></td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                    </tr>
+                    <tr>
+                        <td>Word-document met huisstijl-template</td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-meh">Matig</span></td>
+                        <td><span class="badge-score score-meh">Matig</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                    </tr>
+                    <tr>
+                        <td>Python-script om donatiedata te verwerken</td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-no">N.v.t.</span></td>
+                    </tr>
+                    <tr>
+                        <td>Wekelijkse automatisering bouwen</td>
+                        <td><span class="badge-score score-meh">Beperkt</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                        <td><span class="badge-score score-meh">Power Automate</span></td>
+                    </tr>
+                    <tr>
+                        <td>Excel-data analyseren of opschonen</td>
+                        <td><span class="badge-score score-best">Code Interpreter</span></td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-good">Goed</span></td>
+                        <td><span class="badge-score score-best">Beste</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--text-muted); font-style: italic; margin-top: 1.5rem;">
+            "Beste" betekent niet "10x beter", maar: dit is de tool waar ik mee zou beginnen voor déze taak. "Goed" werkt prima. "Matig" werkt, maar er is iets beters. Let op de twee middelste kolommen: <strong style="color: var(--text-secondary);">Codex CLI en Claude Code scoren bijna overal gelijk</strong>. Beide draaien lokaal, beide praten via MCP met dezelfde marketing-tools. Het echte verschil is het model eronder (GPT-5-Codex vs Opus 4.7), niet de mogelijkheden.
+        </p>
+
+        <p class="chart-caption">Hoe verder van het midden, hoe sterker de score op die as. Codex CLI en Claude Code vallen bijna samen, het verschil is modelvoorkeur.</p>
+        <div class="chart-wrap" style="max-width: 720px; margin: 0 auto;">
+            <canvas id="radarChart" aria-label="Radar-grafiek: vergelijking van vier AI-tools op zes assen" role="img"></canvas>
+        </div>
+    </section>
+
+    <!-- 07 — CODEX CLI -->
+    <section class="section" id="codex">
+        <div class="section-eyebrow">07 · Codex CLI</div>
+        <h2 class="section-title">De terminal-tweeling van Claude Code.</h2>
+        <p class="section-lead">Codex was lang een cloud-tool voor GitHub. Dat beeld klopt niet meer. De Codex CLI draait lokaal in je terminal, in elke map, zonder GitHub. En onder de motorkap zitten exact dezelfde bouwstenen als bij mij.</p>
+
+        <p class="section-body" style="max-width: var(--measure); color: var(--text-secondary); margin-bottom: 0.5rem;">Voor het marketing-team blijft de ChatGPT-GUI de dagelijkse ingang. Maar voor één technische collega die wil doorpakken: met Codex CLI bouw je dezelfde orchestratie-stack die ik bij Rik gebruik. Eerlijk: de capaciteitskloof tussen Codex CLI en Claude Code is in de loop van dit jaar grotendeels gesloten.</p>
+
+        <div class="codex-scenarios">
+            <article class="codex-card">
+                <div class="codex-card-tag">Wat het kan · 1</div>
+                <h4 class="codex-card-title">Dezelfde marketing-MCP's</h4>
+                <p class="codex-card-body">Codex CLI praat via MCP met dezelfde tools als ik: <strong>WordPress</strong> publiceren, <strong>GA4</strong>, <strong>Search Console</strong>, <strong>Google Ads</strong> en <strong>DataForSEO</strong> uitlezen. De koppelingen staan kant en klaar op GitHub en gaan in <code>~/.codex/config.toml</code>.</p>
+            </article>
+
+            <article class="codex-card">
+                <div class="codex-card-tag">Wat het kan · 2</div>
+                <h4 class="codex-card-title">Hooks voor kwaliteitsbewaking</h4>
+                <p class="codex-card-body">Codex CLI heeft echte hooks, met dezelfde events als Claude Code: <code>SessionStart</code>, <code>PreToolUse</code>, <code>PostToolUse</code>, <code>Stop</code>. Daarmee blokkeer je bijvoorbeeld een publicatie zonder review, of scan je copy op jaartallen voordat het live gaat.</p>
+            </article>
+
+            <article class="codex-card">
+                <div class="codex-card-tag">Wat het kan · 3</div>
+                <h4 class="codex-card-title">Subagents + AGENTS.md</h4>
+                <p class="codex-card-body">Een hoofdagent met gespecialiseerde subagents, precies als Mark met zijn copywriter en factchecker. De vaste context leg je vast in <code>AGENTS.md</code>, de directe tegenhanger van mijn <code>CLAUDE.md</code>.</p>
+            </article>
+
+            <article class="codex-card">
+                <div class="codex-card-tag">Wat het kan · 4</div>
+                <h4 class="codex-card-title">En het klassieke script-werk</h4>
+                <p class="codex-card-body">Donatie-CSV's opschonen, een Apps Script voor wekelijkse Runway Run-rapportage, een nachtelijke scraper op <code>maf.nl/projecten/</code>. En als er ooit toch GitHub-werk is, doet de cloud-variant de pull requests.</p>
+            </article>
+        </div>
+
+        <h3 style="font-family:'Fraunces',serif; font-weight:400; font-size:clamp(1.4rem,2.4vw,1.9rem); margin-top:3rem; color:var(--text-primary); letter-spacing:-0.02em;">Functie-pariteit: de tweeling naast elkaar</h3>
+        <div class="parity">
+            <div class="parity-row is-header">
+                <div class="parity-cell feat">Bouwsteen</div>
+                <div class="parity-cell mark parity-col-codex">Codex CLI</div>
+                <div class="parity-cell mark parity-col-claude">Claude Code</div>
+            </div>
+            <div class="parity-row">
+                <div class="parity-cell feat">Lokaal lezen, wijzigen, uitvoeren</div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+            </div>
+            <div class="parity-row">
+                <div class="parity-cell feat">MCP-tools (WordPress, GA4, GSC, Ads, DataForSEO)</div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+            </div>
+            <div class="parity-row">
+                <div class="parity-cell feat">Hooks (SessionStart, PreToolUse, Stop ...)</div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+            </div>
+            <div class="parity-row">
+                <div class="parity-cell feat">Subagents voor parallel werk</div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+            </div>
+            <div class="parity-row">
+                <div class="parity-cell feat">Projectgeheugen (AGENTS.md / CLAUDE.md)</div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+            </div>
+            <div class="parity-row">
+                <div class="parity-cell feat">Skills en plugins</div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+            </div>
+            <div class="parity-row">
+                <div class="parity-cell feat">Slash commands</div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+                <div class="parity-cell mark"><span>&#10003;</span></div>
+            </div>
+        </div>
+        <p class="chart-caption" style="margin-top:1rem;">Zeven bouwstenen, twee keer een vinkje. De tools zijn functioneel een tweeling, het model eronder verschilt.</p>
+
+        <p class="pull-quote" style="margin-top: 3rem;">
+            Waar Claude Code nu nog wint, zit het in het model. Opus 4.7 redeneert expliciet, volgt gelaagde instructies trouw, schrijft idiomatischer Nederlands. Niet in de mogelijkheden. Die zijn vrijwel gelijk.
+            <span class="pull-quote-attr">De eerlijke conclusie</span>
+        </p>
+    </section>
+
+    <!-- 08 — COPILOT -->
+    <section class="section" id="copilot">
+        <div class="section-eyebrow">08 · Office 365 Copilot</div>
+        <h2 class="section-title">Een goede assistent. Niet jullie creatieve werkpaard.</h2>
+
+        <div class="copilot-block">
+            <div class="copilot-block-side">
+                Copilot is sterk waar het werk al gebeurt.
+                <em>Word · Excel · Outlook · Teams · SharePoint</em>
+            </div>
+            <div class="copilot-block-main">
+                <p><strong>Waarvoor wel:</strong> meeting-samenvattingen uit Teams (echt goed), e-mail-drafts in Outlook, bestaande Word-documenten herstructureren, Excel-formules en pivottabellen, snel zoeken door SharePoint, PowerPoint-decks uit een outline.</p>
+                <p><strong>Waarvoor niet:</strong> creatief schrijfwerk voor donateurs, SEO-onderzoek, beeldgeneratie voor social, strategie. De output is correct maar bloedeloos. Copilot is gebouwd voor productiviteit, niet voor creatie.</p>
+                <p><strong>Advies:</strong> houd Copilot voor wat het is, een interne productiviteit-versterker. Laat de creatieve marketing-output bij ChatGPT (of mij). Geen overlap forceren tussen de twee.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 09 — MORGEN -->
+    <section class="section" id="morgen">
+        <div class="section-eyebrow">09 · Morgen beginnen</div>
+        <h2 class="section-title">Vijf stappen. Klaar voor de lunch.</h2>
+        <p class="section-lead">Wie deze workshop verlaat zonder iets concreets in handen, vergeet binnen een week wat we hier besproken hebben. Daarom: een korte checklist die je morgenochtend voor de koffie kunt afvinken.</p>
+
+        <div class="checklist">
+            <div class="check-item">
+                <div class="check-box">1</div>
+                <div class="check-body">
+                    <h4 class="check-title">Maak het Project "MAF Marketing" aan</h4>
+                    <p class="check-detail">In ChatGPT Business rechts → <code>Projects</code> → <code>New</code>. Plak de MAF-systeemprompt (kant en klaar in de meegestuurde tekst-bijlage van deze workshop).</p>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="check-box">2</div>
+                <div class="check-body">
+                    <h4 class="check-title">Upload drie knowledge files</h4>
+                    <p class="check-detail">In het Project: <code>llms.txt</code>, <code>01_Profiel.txt</code>, <code>04_Stem_Persoonlijkheid.txt</code>. Vraag Rik om de bestanden, ze zijn al gedistilleerd uit jullie kennisbank.</p>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="check-box">3</div>
+                <div class="check-body">
+                    <h4 class="check-title">Bouw één Custom GPT: <em>MAF Copywriter</em></h4>
+                    <p class="check-detail">Linksboven in ChatGPT → <code>GPTs</code> → <code>Create</code>. Plak de copywriter-instructie (in de bijlage). Zelfde knowledge files als het Project. Test direct met: <em>"schrijf een korte intro voor een nieuwsbrief over Tsjaad."</em></p>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="check-box">4</div>
+                <div class="check-body">
+                    <h4 class="check-title">Zet Memory aan en prim het</h4>
+                    <p class="check-detail">In je instellingen: <code>Memory: on</code>. Begin een gesprek met: <em>"Onthoud dat MAF Nederland Stichting Mission Aviation Fellowship is, vier pijlers heeft (medisch, zending, noodhulp, ontwikkeling), tagline 'Vliegen voor Leven', en geen jaartallen in copy gebruikt."</em></p>
+                </div>
+            </div>
+
+            <div class="check-item">
+                <div class="check-box">5</div>
+                <div class="check-body">
+                    <h4 class="check-title">Plan de tweede sessie: over een week</h4>
+                    <p class="check-detail">Zet over zeven dagen 60 minuten in jullie agenda. Doel van die sessie: de andere vijf Custom GPTs bouwen (Verhalen-Editor, Pijler-Classifier, Factcheck, Brand Reviewer, Donateur-Psycholoog). Met deze ervaring opgebouwd, kost dat ongeveer een uur.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="pull-quote" style="margin-top: clamp(2.5rem, 5vw, 4rem);">
+            De stack die jullie morgen opzetten, is dezelfde manier van werken die ik bij Rik gebruik. De gereedschappen verschillen. Het denken is identiek.
+            <span class="pull-quote-attr">Slotwoord van de workshop</span>
+        </p>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="report-footer">
+    <p><strong>Workshop AI-Stack · MAF Nederland Marketing-afdeling</strong></p>
+    <p class="report-footer-line">Opgesteld door Rik Goedhart · 19 mei · ter ondersteuning van de live-sessie op 20 mei</p>
+    <p class="report-footer-line">Geen tooling-pitch. Een werkwijze. Vragen? bel/app Rik.</p>
+</footer>
+
+<!-- JavaScript -->
+<script>
+function toggleTheme() {
+    var current = document.documentElement.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch(e) {}
+    updateToggleIcon();
+    rerenderMafCharts();
+}
+function updateToggleIcon() {
+    var btn = document.querySelector('.theme-toggle');
+    if (btn) {
+        var theme = document.documentElement.getAttribute('data-theme');
+        btn.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+}
+
+// ─────────── GRAFIEKEN (Chart.js, dark-mode-aware) ───────────
+window._mafCharts = [];
+function rerenderMafCharts() {
+    requestAnimationFrame(function() {
+        (window._mafCharts || []).forEach(function(c) { c.rebuild(); });
+    });
+}
+function mafCssVar(name, fallback) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v || fallback;
+}
+
+function buildRadarConfig() {
+    var textMuted = mafCssVar('--ink-mute', '#767068');
+    var gridColor = mafCssVar('--paper-line', '#E5DDCC');
+    var textPrimary = mafCssVar('--ink', '#1A1815');
+    return {
+        type: 'radar',
+        data: {
+            labels: [
+                ['Content-kwaliteit', '(NL)'],
+                'MCP / tool-integratie',
+                ['Gebruiksgemak', '(no-code)'],
+                'Automatisering',
+                'Office-integratie',
+                'Beeldgeneratie'
+            ],
+            datasets: [
+                { label: 'ChatGPT GUI', data: [9,7,9,5,5,9], borderColor: '#27AE60', backgroundColor: 'rgba(39,174,96,0.12)', borderWidth: 2, pointBackgroundColor: '#27AE60', pointBorderColor: '#fff', pointRadius: 3.5, pointHoverRadius: 6 },
+                { label: 'Codex CLI', data: [7,9,4,9,2,3], borderColor: '#6B4F8F', backgroundColor: 'rgba(107,79,143,0.10)', borderWidth: 2, pointBackgroundColor: '#6B4F8F', pointBorderColor: '#fff', pointRadius: 3.5, pointHoverRadius: 6 },
+                { label: 'Claude Code', data: [9,9,4,9,2,6], borderColor: '#E67E22', backgroundColor: 'rgba(230,126,34,0.10)', borderWidth: 2.5, borderDash: [6,3], pointBackgroundColor: '#E67E22', pointBorderColor: '#fff', pointRadius: 3.5, pointHoverRadius: 6 },
+                { label: 'Office Copilot', data: [5,3,8,5,9,4], borderColor: '#003D7A', backgroundColor: 'rgba(0,61,122,0.08)', borderWidth: 2, pointBackgroundColor: '#003D7A', pointBorderColor: '#fff', pointRadius: 3.5, pointHoverRadius: 6 }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            animation: { duration: 500, easing: 'easeInOutQuart' },
+            scales: {
+                r: {
+                    min: 0, max: 10,
+                    ticks: { stepSize: 2, color: textMuted, backdropColor: 'transparent', font: { family: "'Instrument Sans', sans-serif", size: 11, weight: '600' }, callback: function(v){ return v === 0 ? '' : v; } },
+                    grid: { color: gridColor, lineWidth: 1 },
+                    angleLines: { color: gridColor, lineWidth: 1 },
+                    pointLabels: { color: textPrimary, font: { family: "'Instrument Sans', sans-serif", size: 12, weight: '600' }, padding: 8 }
+                }
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { color: textMuted, font: { family: "'Instrument Sans', sans-serif", size: 12, weight: '500' }, boxWidth: 12, boxHeight: 12, padding: 16, usePointStyle: true, pointStyle: 'circle' } },
+                tooltip: { backgroundColor: 'rgba(26,24,21,0.92)', titleColor: '#F2EDE0', bodyColor: '#C9BFAA', padding: 10, titleFont: { family: "'Fraunces', serif", size: 13 }, bodyFont: { family: "'Instrument Sans', sans-serif", size: 12 }, callbacks: { label: function(ctx){ return ' ' + ctx.dataset.label + ': ' + ctx.raw + '/10'; } } }
+            }
+        }
+    };
+}
+
+function buildBarConfig() {
+    var textMuted = mafCssVar('--ink-mute', '#767068');
+    var gridColor = mafCssVar('--paper-line', '#E5DDCC');
+    var textPrimary = mafCssVar('--ink', '#1A1815');
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    var labelColor = isDark ? '#C9BFAA' : '#3D3A35';
+    return {
+        type: 'bar',
+        data: {
+            labels: ['Niveau 1 · Vandaag', 'Niveau 2 · Deze week', 'Niveau 3 · Deze maand'],
+            datasets: [{ label: 'Tijdsinvestering (uren)', data: [0.25, 1.5, 5], backgroundColor: ['#C8102E', '#003D7A', '#6B4F8F'], borderWidth: 0, borderRadius: 3, borderSkipped: false, barThickness: 38 }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: { duration: 500, easing: 'easeInOutQuart' },
+            layout: { padding: { right: 70 } },
+            scales: {
+                x: { min: 0, max: 6, grid: { color: gridColor, lineWidth: 1 }, border: { display: false }, ticks: { color: textMuted, font: { family: "'Instrument Sans', sans-serif", size: 11, weight: '600' }, stepSize: 1, callback: function(v){ return v === 0 ? '' : v + ' u'; } } },
+                y: { grid: { display: false }, border: { display: false }, ticks: { color: textPrimary, font: { family: "'Fraunces', serif", size: 13, weight: '400' }, padding: 8 } }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: { backgroundColor: 'rgba(26,24,21,0.92)', titleColor: '#F2EDE0', bodyColor: '#C9BFAA', padding: 10, titleFont: { family: "'Fraunces', serif", size: 13 }, bodyFont: { family: "'Instrument Sans', sans-serif", size: 12 }, callbacks: { label: function(ctx){ var v = ctx.raw; if (v === 0.25) return ' 15 minuten'; if (v === 1.5) return ' 1,5 uur'; return ' ' + v + ' uur'; } } }
+            }
+        },
+        plugins: [{
+            id: 'mafDatalabels',
+            afterDatasetsDraw: function(chart) {
+                var ctx = chart.ctx;
+                var labels = ['15 min', '1,5 uur', '5 uur'];
+                ctx.save();
+                ctx.font = "600 12px 'Instrument Sans', sans-serif";
+                ctx.fillStyle = labelColor;
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'middle';
+                chart.getDatasetMeta(0).data.forEach(function(bar, i) {
+                    ctx.fillText(labels[i], bar.x + 8, bar.y);
+                });
+                ctx.restore();
+            }
+        }]
+    };
+}
+
+function initMafChart(canvasId, builder) {
+    var el = document.getElementById(canvasId);
+    if (!el || !window.Chart) return;
+    var ctx = el.getContext('2d');
+    var chart = new Chart(ctx, builder());
+    window._mafCharts.push({ rebuild: function() { chart.destroy(); chart = new Chart(ctx, builder()); } });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateToggleIcon();
+
+    // Grafieken
+    initMafChart('radarChart', buildRadarConfig);
+    initMafChart('bouwplanChart', buildBarConfig);
+
+    // Progress-rail
+    var fill = document.getElementById('progressFill');
+    function updateProgress() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        if (fill) fill.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+});
+</script>
+
+</body>
+</html>
