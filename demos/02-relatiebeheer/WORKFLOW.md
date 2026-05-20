@@ -12,7 +12,8 @@ Twee diagrammen om op groot scherm te tonen tijdens de sessie. Eerst de huidige 
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -50,7 +51,8 @@ Vraag aan het team: hoeveel gesprekken zijn de afgelopen maand zo niet helemaal 
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -97,7 +99,8 @@ Wat verandert: alles wat in de huidige situatie kan blijven liggen, krijgt nu ee
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,

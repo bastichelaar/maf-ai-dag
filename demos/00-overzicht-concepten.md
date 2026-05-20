@@ -47,7 +47,8 @@ Een standaard aansluiting waarmee een AI rechtstreeks aan jouw systemen kan prat
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -90,7 +91,8 @@ Voor de dag van vandaag draaien de agents op fictieve MAF-data in folders op de 
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,

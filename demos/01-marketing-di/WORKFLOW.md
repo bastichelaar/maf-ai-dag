@@ -12,7 +12,8 @@ Drie diagrammen om op groot scherm te tonen tijdens de sessie. Eerst de huidige 
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -51,7 +52,8 @@ Vraag aan het team: herken je dit? Hoeveel tijd zit hier in een gemiddeld verhaa
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -95,7 +97,8 @@ Wat verandert: één invoer, drie tekstposts plus passende afbeelding, plus toon
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -138,7 +141,8 @@ Wat er bij komt: dezelfde drie tekstposts en dezelfde afbeelding gaan door een t
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,

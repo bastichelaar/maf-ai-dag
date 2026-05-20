@@ -1,0 +1,3 @@
+# Samenvattende alinea voor mei 2026-rapportage
+
+In mei 2026 vallen drie posten op ten opzichte van april. Onderhoud vliegtuigen daalt met 44,7% (EUR -17400) na de aprilpiek, en komt daarmee onder het maandbudget uit. ICT en software stijgt met 162,2% (EUR +7300) tot EUR 11800, ruim boven het maandbudget van EUR 4500. Marketing en communicatie stijgt met 57,6% (EUR +6800) tot EUR 18600, EUR 5600 boven budget. Daarnaast verdient brandstof veldoperaties aandacht: vijfde achtereenvolgende stijgende maand, nu EUR 6200 boven het maandbudget. Voor de verklaring van de drie hoofdafwijkingen is nadere informatie nodig vanuit ICT, Marketing en de luchthavendienst Tsjaad of Papua.

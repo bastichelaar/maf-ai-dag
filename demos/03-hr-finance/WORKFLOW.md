@@ -12,7 +12,8 @@ Per sub-team een eigen huidige situatie en met-agent diagram. Toon op groot sche
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -48,7 +49,8 @@ Vraag aan het team: herken je dit, hoeveel mails per week vallen onder dit patro
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -58,10 +60,10 @@ Vraag aan het team: herken je dit, hoeveel mails per week vallen onder dit patro
   'titleTopMargin': 30
 }}}%%
 flowchart LR
-  A[Inkomende mail in input/] --> B[mail-reactie agent]
+  A["Inkomende mail in input/"] --> B[mail-reactie agent]
   T[MAF-HR-toon] --> B
   H[Handboek-fragment] --> B
-  B --> C[Type-detectie: sollicitatie, thuisfront, veld of intern]
+  B --> C["Type-detectie: sollicitatie, thuisfront, veld of intern"]
   C --> D[Concept-antwoord in juiste toon]
   C --> E[Notitie met check-punten voor medewerker]
   D --> F[HR reviewt, personaliseert, verzendt]
@@ -89,7 +91,8 @@ Wat verandert: de agent leest de toon-richtlijn en het handboek elke keer opnieu
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -125,7 +128,8 @@ flowchart LR
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -164,7 +168,8 @@ flowchart LR
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -198,7 +203,8 @@ flowchart LR
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -237,7 +243,8 @@ flowchart LR
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,

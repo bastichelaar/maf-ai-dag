@@ -12,7 +12,8 @@ Twee diagrammen voor op groot scherm.
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -53,7 +54,8 @@ Vraag het team: welke fase van een evenement kost de meeste tijd? Wat blijft het
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,
@@ -98,7 +100,8 @@ flowchart LR
   'lineColor': '#393535',
   'secondaryColor': '#f4f4f4',
   'tertiaryColor': '#ffffff',
-  'fontFamily': 'sans-serif'
+  'fontFamily': 'sans-serif',
+  'fontSize': '24px'
 }, 'flowchart': {
   'subGraphTitleMargin': {'top': 30, 'bottom': 60},
   'padding': 30,

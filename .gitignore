@@ -1,29 +1,3 @@
-# Live demo-output (per run gegenereerd, niet committen)
-demos/01-marketing-di/output/linkedin-post.md
-demos/01-marketing-di/output/nieuwsbrief-intro.md
-demos/01-marketing-di/output/instagram-caption.md
-demos/01-marketing-di/output/brand-voice-feedback.md
-demos/01-marketing-di/output/images/
-demos/01-marketing-di/output/site/
-demos/01-marketing-di/output/email/
-demos/01-marketing-di/output/social/
-demos/03-hr-finance/output/concept-antwoord.md
-demos/03-hr-finance/output/concept-antwoord-notitie.md
-demos/03-hr-finance/output/welkomstmail.md
-demos/03-hr-finance/output/week-1-checklist.md
-demos/03-hr-finance/output/gespreksvragen-90-dagen.md
-demos/03-hr-finance/output/documenten-leeslijst.md
-demos/03-hr-finance/output/afwijkingen.md
-demos/03-hr-finance/output/samenvattende-alinea.md
-demos/03-hr-finance/output/mogelijke-verklaringen.md
-
-# Wel committen: voorbeeld-fallback voor publicatie-pakket
-!demos/01-marketing-di/output/voorbeeld-publicatiepakket/
-!demos/01-marketing-di/output/voorbeeld-publicatiepakket/**
-
-# Wel committen: voorbeeld-fallback voor mail-reactie
-!demos/03-hr-finance/output/voorbeeld-mailreactie/
-!demos/03-hr-finance/output/voorbeeld-mailreactie/**
 
 # Wel committen: skill zelf
 !.claude/skills/maf-design/
