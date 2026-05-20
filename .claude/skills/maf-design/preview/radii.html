@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    html, body { background:#fff; margin:0; }
+    .card { padding: 24px 28px; box-sizing: border-box; }
+    .row { display:flex; gap: 22px; align-items: end; }
+    .item { display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .shape { width: 96px; height: 64px; background: #FAF7F2; box-shadow: inset 0 0 0 1px rgba(31,42,58,.08); }
+    .tag { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: #1F2A3A; }
+    .tag small { display:block; color: rgba(31,42,58,.5); margin-top: 1px; text-align:center; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="row">
+      <div class="item"><div class="shape" style="border-radius:4px"></div><div class="tag">radius-1<small>4px</small></div></div>
+      <div class="item"><div class="shape" style="border-radius:6px"></div><div class="tag">radius-2<small>6px · buttons</small></div></div>
+      <div class="item"><div class="shape" style="border-radius:8px"></div><div class="tag">radius-3<small>8px</small></div></div>
+      <div class="item"><div class="shape" style="border-radius:12px"></div><div class="tag">radius-4<small>12px · cards</small></div></div>
+      <div class="item"><div class="shape" style="border-radius:16px"></div><div class="tag">radius-5<small>16px</small></div></div>
+      <div class="item"><div class="shape" style="border-radius:9999px"></div><div class="tag">pill<small>9999px</small></div></div>
+    </div>
+  </div>
+</body>
+</html>

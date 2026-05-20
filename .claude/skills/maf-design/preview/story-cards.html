@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    html, body { background:#FAF7F2; margin:0; }
+    .wrap { padding: 24px 28px; box-sizing: border-box; display:grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .card-ui { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(31,42,58,.08); overflow: hidden; display:flex; flex-direction: column; }
+    .card-ui .photo { height: 130px; background: linear-gradient(135deg, #5BA4D1, #2E7AAB); position: relative; }
+    .card-ui .photo::after { content:""; position:absolute; inset: 0; background: linear-gradient(to top, rgba(31,42,58,.55), transparent 55%); }
+    .card-ui .photo .country { position:absolute; bottom: 10px; left: 14px; color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .card-ui .body { padding: 16px 18px 18px; }
+    .card-ui .eyebrow { font-size: 11px; color: #450003; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .card-ui h4 { margin: 6px 0 8px; font-size: 19px; font-weight: 700; color: #1F2A3A; line-height: 1.2; }
+    .card-ui p { margin: 0 0 12px; font-size: 13px; line-height: 1.5; color: rgba(31,42,58,.75); }
+    .card-ui a { font-size: 13px; font-weight: 700; color: #450003; text-decoration: none; }
+    .card-ui a::after { content: " →"; }
+    .photo-2 { background: linear-gradient(135deg, #6A8F3D, #4F6F2A) !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card-ui">
+      <div class="photo"><div class="country">Oeganda</div></div>
+      <div class="body">
+        <div class="eyebrow">Verhaal uit het veld</div>
+        <h4>Een arts in 45 minuten in plaats van negen uur</h4>
+        <p>Pastor Clement bezoekt 25 kerken die hij zelf stichtte. Dankzij MAF kan hij weer reizen.</p>
+        <a href="#">Lees verder</a>
+      </div>
+    </div>
+    <div class="card-ui">
+      <div class="photo photo-2"><div class="country">Zuid-Soedan</div></div>
+      <div class="body">
+        <div class="eyebrow">Noodhulp</div>
+        <h4>Hulpgoederen vliegen waar wegen ontbreken</h4>
+        <p>Na overstromingen zijn dorpen weken onbereikbaar. Wij vliegen voedsel en medicijnen in.</p>
+        <a href="#">Lees verder</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

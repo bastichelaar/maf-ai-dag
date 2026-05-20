@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    html, body { background: #fff; margin: 0; }
+    .card { padding: 24px 28px; box-sizing: border-box; }
+    .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .sw { border-radius: 8px; height: 110px; padding: 10px 12px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 0 0 0 1px rgba(31,42,58,.06); }
+    .sw .name { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+    .sw .hex { font-family: ui-monospace, Menlo, monospace; font-size: 11px; opacity: 0.85; }
+    .sw.on-dark { color: #fff; }
+    .sw.on-light { color: #1F2A3A; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="swatches">
+      <div class="sw on-dark" style="background:#450003"><span class="name">Red</span><span class="hex">#450003 · brand</span></div>
+      <div class="sw on-dark" style="background:#004073"><span class="name">Blue</span><span class="hex">#004073 · brand</span></div>
+      <div class="sw on-dark" style="background:#5B6770"><span class="name">Gray</span><span class="hex">#5B6770 · brand</span></div>
+      <div class="sw on-dark" style="background:#1F2A3A"><span class="name">Ink</span><span class="hex">#1F2A3A · text</span></div>
+      <div class="sw on-light" style="background:#FAF7F2"><span class="name">Cream</span><span class="hex">#FAF7F2 · surface</span></div>
+      <div class="sw on-light" style="background:#FFFFFF; box-shadow: inset 0 0 0 1px rgba(31,42,58,.12)"><span class="name">White</span><span class="hex">#FFFFFF</span></div>
+    </div>
+  </div>
+</body>
+</html>

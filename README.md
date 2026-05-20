@@ -10,44 +10,40 @@ Voorbereiding voor een AI-inspiratiedag bij Stichting MAF Nederland (Mission Avi
 
 ## Dagstructuur
 
-| Tijd | Onderdeel |
-|------|-----------|
-| 09:00 -- 09:45 | Plenaire opener |
-| 10:00 -- 11:30 | Cluster 1: Communicatie & relaties |
-| 11:45 -- 13:15 | Cluster 2: Bedrijfsvoering |
-| 13:15 -- 14:00 | Lunch |
-| 14:00 -- 15:30 | Cluster 3: Evenementen |
-| 15:45 -- 17:15 | Cluster 4: Digital Innovation |
-| 17:15 -- 17:45 | Plenaire afsluiter |
+Vier sessies van 90 minuten, geen plenaire opener of afsluiter. Per sessie: opener, mining-vragen, live demo, workflow-canvas, quick win en brug naar vervolg.
 
-Elke clustersessie: intake-antwoorden doorlopen, live demo, workflow-canvas tekenen, één quick win committeren.
+Voor de definitieve flow zie [`sessies-draaiboek.md`](sessies-draaiboek.md).
 
 ---
 
-## Clusters
+## Clusters (definitieve indeling 20 mei)
 
 | Cluster | Teams | Focus |
 |---------|-------|-------|
-| 1. Communicatie & relaties | Donateurs, marketing, relatiebeheer | Content herhaalwerk, personalisatie op schaal |
-| 2. Bedrijfsvoering | HR, finance | Rapportages, onboarding, repetitieve vragen |
-| 3. Evenementen | Evenementen | Draaiboeken herbruikbaar maken, deelnemerscommunicatie |
-| 4. Digital Innovation | Digital innovation | Voorbij Copilot: agents, MCP, autonome workflows |
+| 1. Marketing en Digital Innovation | Marketing, digital innovation | Content op schaal, brand-voice, brug naar agents en MCP |
+| 2. Relatiebeheer | Relatiebeheer en donateurs | Persoonlijke communicatie op schaal, gesprekken voorbereiden en opvolgen, CRM-bijhouden |
+| 3. HR en Financien | HR, finance | Rapportages, onboarding, beleid-FAQ, repetitieve vragen |
+| 4. Evenementen | Evenementen | Draaiboeken herbruikbaar maken, deelnemerscommunicatie, evaluaties verwerken |
+
+Let op: deze clustering wijkt af van het oorspronkelijke voorstel in [`mail-voorstel-structuur.md`](mail-voorstel-structuur.md) en [`vragen-per-cluster.md`](vragen-per-cluster.md). Die documenten dienen als achtergrond.
 
 ---
 
 ## Bestanden in deze map
 
-### Klaar
+### Primair voor 20 mei
+- [`sessies-draaiboek.md`](sessies-draaiboek.md) — Draaiboek per cluster: 90-min flow, mining-vragen, demo-opties, workflow-canvas, takeaways, inspiratiecases, prompt-kaarten
+- [`tools-spiekbriefje.md`](tools-spiekbriefje.md) — Snelle referentie: Copilot gratis vs betaald, Teams Premium, ChatGPT, Claude, met misvattingen en vragen-die-komen
+- [`demos/`](demos/) — Werkende agent-demos per cluster met Mermaid-workflows, voorbeelddata, draaiboeken en skelet-templates. Start in [`demos/README.md`](demos/README.md)
+
+### Achtergrond
 - [`intake-mail.md`](intake-mail.md) — Template intake-mail voor teams (3 vragen, ~5 min invullen)
-- [`mail-voorstel-structuur.md`](mail-voorstel-structuur.md) — Mail aan Gilbert met voorstel dagopzet en clusterindeling
-- [`vragen-per-cluster.md`](vragen-per-cluster.md) — Werkdocument per cluster: sessievragen, aannames, demo-idee en canvas-startvraag
+- [`mail-voorstel-structuur.md`](mail-voorstel-structuur.md) — Mail aan Gilbert met oorspronkelijk voorstel dagopzet
+- [`vragen-per-cluster.md`](vragen-per-cluster.md) — Eerder werkdocument per cluster (oude indeling, nuttige inhoud)
 - [`voorbereiding-ai-landschap.md`](voorbereiding-ai-landschap.md) — Achtergrond voor Bas & Rik: Copilot, Claude, workflow-tools en MCP uitgelegd
 
-### Nog aan te maken
-- `dagprogramma.md` — Volledig dagprogramma met tijden en instructies per sessie
-- `demo-templates/` — Demo-scripts per cluster (invulbaar live)
+### Nog aan te maken (optioneel)
 - `vervolgpakketten.md` — One-pager met drie vervolgpakketten (A: Quick Wins Sprint, B: Workflow Implementation, C: AI Center of Excellence)
-- `workflow-canvas.md` — Instructies voor whiteboard/Miro-canvas per sessie
 
 ---
 

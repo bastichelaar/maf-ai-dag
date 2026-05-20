@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    html, body { background:#FAF7F2; margin:0; }
+    .card { padding: 36px 28px; box-sizing: border-box; }
+    .row { display:flex; gap: 32px; align-items: center; justify-content: center; }
+    .item { display:flex; flex-direction:column; align-items:center; gap:12px; }
+    .shape { width: 110px; height: 70px; background: #fff; border-radius: 10px; }
+    .s1 { box-shadow: 0 1px 2px rgba(31,42,58,.06), 0 1px 1px rgba(31,42,58,.04); }
+    .s2 { box-shadow: 0 4px 12px rgba(31,42,58,.08); }
+    .s3 { box-shadow: 0 10px 30px rgba(31,42,58,.12); }
+    .s4 { box-shadow: 0 20px 50px rgba(31,42,58,.18); }
+    .tag { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: #1F2A3A; text-align:center; }
+    .tag small { display:block; color: rgba(31,42,58,.5); margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="row">
+      <div class="item"><div class="shape s1"></div><div class="tag">shadow-1<small>subtle lift</small></div></div>
+      <div class="item"><div class="shape s2"></div><div class="tag">shadow-2<small>default card</small></div></div>
+      <div class="item"><div class="shape s3"></div><div class="tag">shadow-3<small>hover · modal</small></div></div>
+      <div class="item"><div class="shape s4"></div><div class="tag">shadow-4<small>floating</small></div></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    html, body { background:#fff; margin:0; }
+    .card { padding: 22px 28px; box-sizing: border-box; display:grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items:start; }
+    label { display:block; font-size: 13px; font-weight: 600; color: #1F2A3A; margin-bottom: 6px; letter-spacing: 0.02em; }
+    .field { width: 100%; box-sizing: border-box; padding: 11px 14px; font-family: var(--font-sans); font-size: 15px; color: #1F2A3A; background: #fff; border: 1px solid rgba(31,42,58,.18); border-radius: 6px; transition: all 150ms cubic-bezier(0.2,0.8,0.2,1); }
+    .field:focus { outline: none; border-color: #450003; box-shadow: 0 0 0 3px rgba(69,0,3,.15); }
+    .help { font-size: 12px; color: rgba(31,42,58,.55); margin-top: 6px; }
+    .err { font-size: 12px; color: #B8181B; margin-top: 6px; }
+    .field.error { border-color: #B8181B; }
+    .check { display:flex; align-items:center; gap:10px; font-size: 14px; color: #1F2A3A; }
+    .check input { accent-color: #450003; width: 18px; height: 18px; }
+    .radio-row { display:flex; gap: 10px; }
+    .pill { padding: 10px 18px; border: 1.5px solid rgba(31,42,58,.18); border-radius: 9999px; font-size: 14px; font-weight: 600; cursor: pointer; color: #1F2A3A; background: #fff; }
+    .pill.selected { border-color: #450003; background: #450003; color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div>
+      <label>E-mailadres</label>
+      <input class="field" type="email" value="naam@voorbeeld.nl">
+      <div class="help">We sturen u nooit ongevraagd post.</div>
+    </div>
+    <div>
+      <label>Postcode</label>
+      <input class="field error" type="text" value="123">
+      <div class="err">Vul een geldige postcode in.</div>
+    </div>
+    <div style="grid-column: 1 / -1">
+      <label>Gift bedrag</label>
+      <div class="radio-row">
+        <div class="pill">€10</div>
+        <div class="pill selected">€25</div>
+        <div class="pill">€50</div>
+        <div class="pill">€100</div>
+        <div class="pill">Anders</div>
+      </div>
+    </div>
+    <div style="grid-column: 1 / -1" class="check">
+      <input type="checkbox" id="c1" checked>
+      <label for="c1" style="margin:0; font-weight:400">Ja, houd mij op de hoogte van het werk van MAF.</label>
+    </div>
+  </div>
+</body>
+</html>

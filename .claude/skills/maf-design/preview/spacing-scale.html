@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    html, body { background:#fff; margin:0; }
+    .card { padding: 22px 28px; box-sizing: border-box; }
+    .row { display:grid; grid-template-columns: repeat(8, auto); gap: 16px; align-items: end; }
+    .item { display:flex; flex-direction:column; align-items:flex-start; gap: 8px; }
+    .bar { background: #450003; border-radius: 4px; width: 24px; }
+    .tag { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: #1F2A3A; }
+    .tag small { display:block; color: rgba(31,42,58,.5); margin-top: 1px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="row">
+      <div class="item"><div class="bar" style="height:4px"></div><div class="tag">1<small>4px</small></div></div>
+      <div class="item"><div class="bar" style="height:8px"></div><div class="tag">2<small>8px</small></div></div>
+      <div class="item"><div class="bar" style="height:12px"></div><div class="tag">3<small>12px</small></div></div>
+      <div class="item"><div class="bar" style="height:16px"></div><div class="tag">4<small>16px</small></div></div>
+      <div class="item"><div class="bar" style="height:24px"></div><div class="tag">6<small>24px</small></div></div>
+      <div class="item"><div class="bar" style="height:32px"></div><div class="tag">8<small>32px</small></div></div>
+      <div class="item"><div class="bar" style="height:48px"></div><div class="tag">12<small>48px</small></div></div>
+      <div class="item"><div class="bar" style="height:64px"></div><div class="tag">16<small>64px</small></div></div>
+    </div>
+  </div>
+</body>
+</html>

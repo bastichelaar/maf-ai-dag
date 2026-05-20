@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    html, body { background: #fff; margin: 0; }
+    .card { padding: 24px 28px; box-sizing: border-box; }
+    .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .tile { padding: 16px 16px 14px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(31,42,58,.06); }
+    .tile .dot { width: 28px; height: 28px; border-radius: 8px; margin-bottom: 12px; box-shadow: inset 0 0 0 1px rgba(31,42,58,.06); }
+    .tile .name { font-size: 13px; font-weight: 700; color: #1F2A3A; }
+    .tile .role { font-size: 11px; color: rgba(31,42,58,.6); font-family: ui-monospace, Menlo, monospace; margin-top: 3px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="row">
+      <div class="tile"><div class="dot" style="background:#450003"></div><div class="name">Brand red</div><div class="role">--color-accent</div></div>
+      <div class="tile"><div class="dot" style="background:#004073"></div><div class="name">Brand blue</div><div class="role">--maf-blue</div></div>
+      <div class="tile"><div class="dot" style="background:#5B6770"></div><div class="name">Brand gray</div><div class="role">--maf-gray</div></div>
+      <div class="tile"><div class="dot" style="background:#1F2A3A"></div><div class="name">Ink (text)</div><div class="role">--color-fg-1</div></div>
+      <div class="tile"><div class="dot" style="background:#FAF7F2"></div><div class="name">Cream</div><div class="role">--color-bg-2</div></div>
+      <div class="tile"><div class="dot" style="background:#F4EDE2"></div><div class="name">Sand</div><div class="role">--color-bg-3</div></div>
+      <div class="tile"><div class="dot" style="background:#2E7D4F"></div><div class="name">Success</div><div class="role">--color-success</div></div>
+      <div class="tile"><div class="dot" style="background:#B8181B"></div><div class="name">Danger</div><div class="role">--color-danger</div></div>
+    </div>
+  </div>
+</body>
+</html>
