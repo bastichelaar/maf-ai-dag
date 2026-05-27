@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>MAF Finance: afwijkingen mei 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --maf-blue: #002f5f;
+    --maf-red: #d01d20;
+    --maf-grey: #393535;
+    --maf-light: #f4f4f4;
+    --maf-mid: #747678;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #fff;
+    color: var(--maf-grey);
+    margin: 0;
+    padding: 32px;
+    line-height: 1.5;
+  }
+  header {
+    border-bottom: 4px solid var(--maf-blue);
+    padding-bottom: 16px;
+    margin-bottom: 32px;
+  }
+  h1 {
+    color: var(--maf-blue);
+    font-size: 28px;
+    margin: 0 0 4px 0;
+    font-weight: 700;
+  }
+  .subtitle {
+    color: var(--maf-mid);
+    font-size: 14px;
+    margin: 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--maf-light);
+    border-radius: 6px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  }
+  .card h2 {
+    color: var(--maf-blue);
+    font-size: 16px;
+    margin: 0 0 4px 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .card .lede {
+    color: var(--maf-mid);
+    font-size: 13px;
+    margin: 0 0 16px 0;
+  }
+  .chart-wrap {
+    position: relative;
+    height: 480px;
+  }
+  .chart-wrap.short {
+    height: 380px;
+  }
+  .top3 {
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--maf-light);
+    border-left: 6px solid var(--maf-red);
+    border-radius: 4px;
+  }
+  .top3 h2 {
+    color: var(--maf-blue);
+    margin: 0 0 16px 0;
+    font-size: 18px;
+  }
+  .top3-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .top3-list li {
+    background: #fff;
+    padding: 16px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  .top3-rank {
+    color: var(--maf-red);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .top3-post {
+    color: var(--maf-blue);
+    font-weight: 700;
+    font-size: 15px;
+    margin: 4px 0;
+  }
+  .top3-delta {
+    color: var(--maf-grey);
+    font-size: 14px;
+  }
+  .top3-delta strong {
+    color: var(--maf-red);
+  }
+  .top3-delta.down strong {
+    color: var(--maf-blue);
+  }
+  footer {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--maf-light);
+    color: var(--maf-mid);
+    font-size: 12px;
+  }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .top3-list { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Afwijkingen mei 2026</h1>
+  <p class="subtitle">MAF Nederland Finance, maandrapportage. Vergelijking april versus mei 2026.</p>
+</header>
+
+<div class="top3">
+  <h2>Top 3 om in het rapport uit te lichten</h2>
+  <ol class="top3-list">
+    <li>
+      <div class="top3-rank">1</div>
+      <div class="top3-post">Onderhoud vliegtuigen</div>
+      <div class="top3-delta down"><strong>EUR -17.400</strong> ofwel -44,7%</div>
+    </li>
+    <li>
+      <div class="top3-rank">2</div>
+      <div class="top3-post">ICT en software</div>
+      <div class="top3-delta"><strong>EUR +7.300</strong> ofwel +162,2%</div>
+    </li>
+    <li>
+      <div class="top3-rank">3</div>
+      <div class="top3-post">Marketing en communicatie</div>
+      <div class="top3-delta"><strong>EUR +6.800</strong> ofwel +57,6%</div>
+    </li>
+  </ol>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Verschil april naar mei in EUR</h2>
+    <p class="lede">Per post, gesorteerd op absolute afwijking. Rood is toename, blauw is afname.</p>
+    <div class="chart-wrap">
+      <canvas id="chartDelta"></canvas>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Mei 2026 versus maandbudget</h2>
+    <p class="lede">Alleen posten met afwijking groter dan EUR 1.000 in mei.</p>
+    <div class="chart-wrap short">
+      <canvas id="chartBudget"></canvas>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Gegenereerd door rapport-helper agent op basis van input/maandcijfers-fictief.csv. Fictieve data voor demo-doeleinden.
+</footer>
+
+<script>
+  const MAF_BLUE = '#002f5f';
+  const MAF_RED = '#d01d20';
+  const MAF_GREY = '#393535';
+  const MAF_MID = '#747678';
+  const MAF_LIGHT = '#f4f4f4';
+
+  Chart.defaults.font.family = "'Helvetica Neue', Arial, sans-serif";
+  Chart.defaults.color = MAF_GREY;
+
+  const deltaRaw = [
+    { post: 'Onderhoud vliegtuigen', delta: -17400 },
+    { post: 'ICT en software', delta: 7300 },
+    { post: 'Marketing en communicatie', delta: 6800 },
+    { post: 'Personeelskosten Ede', delta: 2700 },
+    { post: 'Onvoorzien', delta: 2500 },
+    { post: 'Brandstof veldoperaties', delta: 2300 },
+    { post: 'Onderwijs en trainingen', delta: 2300 },
+    { post: 'Vluchten Tsjaad', delta: -2300 },
+    { post: 'Vluchten Papua', delta: 1600 },
+    { post: 'Reiskosten medewerkers', delta: 1400 },
+    { post: 'Personeelskosten veld', delta: 1200 },
+    { post: 'Fondsenwervings-acties', delta: 1200 },
+    { post: 'Donateurzorg en relatiebeheer', delta: 400 },
+    { post: 'Overige operationele kosten', delta: 400 },
+    { post: 'Bestuur en governance', delta: -50 },
+    { post: 'Huisvesting Ede', delta: 0 }
+  ];
+
+  deltaRaw.sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta));
+
+  new Chart(document.getElementById('chartDelta'), {
+    type: 'bar',
+    data: {
+      labels: deltaRaw.map(d => d.post),
+      datasets: [{
+        label: 'Verschil EUR',
+        data: deltaRaw.map(d => d.delta),
+        backgroundColor: deltaRaw.map(d => d.delta >= 0 ? MAF_RED : MAF_BLUE),
+        borderWidth: 0
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => 'EUR ' + ctx.parsed.x.toLocaleString('nl-NL')
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: MAF_LIGHT },
+          ticks: {
+            callback: v => v.toLocaleString('nl-NL'),
+            font: { size: 11 }
+          }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { size: 12 } }
+        }
+      }
+    }
+  });
+
+  const budgetData = [
+    { post: 'ICT en software', actual: 11800, budget: 4500 },
+    { post: 'Brandstof veldoperaties', actual: 39200, budget: 33000 },
+    { post: 'Marketing en communicatie', actual: 18600, budget: 13000 },
+    { post: 'Onderhoud vliegtuigen', actual: 21500, budget: 25000 },
+    { post: 'Vluchten Papua', actual: 93100, budget: 90000 },
+    { post: 'Onvoorzien', actual: 3400, budget: 1500 },
+    { post: 'Personeelskosten Ede', actual: 145800, budget: 144000 },
+    { post: 'Onderwijs en trainingen', actual: 4200, budget: 2500 },
+    { post: 'Personeelskosten veld', actual: 101300, budget: 100000 },
+    { post: 'Reiskosten medewerkers', actual: 5200, budget: 4000 },
+    { post: 'Vluchten Tsjaad', actual: 68900, budget: 70000 }
+  ];
+
+  new Chart(document.getElementById('chartBudget'), {
+    type: 'bar',
+    data: {
+      labels: budgetData.map(d => d.post),
+      datasets: [
+        {
+          label: 'Mei 2026',
+          data: budgetData.map(d => d.actual),
+          backgroundColor: MAF_BLUE,
+          borderWidth: 0
+        },
+        {
+          label: 'Maandbudget',
+          data: budgetData.map(d => d.budget),
+          backgroundColor: MAF_MID,
+          borderWidth: 0
+        }
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: { font: { size: 12 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.dataset.label + ': EUR ' + ctx.parsed.x.toLocaleString('nl-NL')
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: MAF_LIGHT },
+          ticks: {
+            callback: v => v.toLocaleString('nl-NL'),
+            font: { size: 11 }
+          }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { size: 11 } }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

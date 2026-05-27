@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI-inspiratiedag MAF Nederland — Vier teams, vier werkende workflows</title>
+<meta name="description" content="Overzicht en uitkomsten van de AI-inspiratiedag op 20 mei 2026 bij Stichting MAF Nederland. Vier clusters, vier werkende Claude-agents, met workflow-canvas en concrete artefacten." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     MAF Nederland — design tokens (subset)
+     ============================================================ */
+  :root {
+    --maf-red:        #450003;
+    --maf-red-deep:   #380003;
+    --maf-red-50:     #F8E8E8;
+    --maf-blue:       #004073;
+    --maf-blue-deep:  #002848;
+    --maf-blue-50:    #E6EEF5;
+    --maf-ink:        #1F2A3A;
+    --maf-ink-80:     rgba(31, 42, 58, 0.80);
+    --maf-ink-60:     rgba(31, 42, 58, 0.60);
+    --maf-ink-40:     rgba(31, 42, 58, 0.40);
+    --maf-ink-10:     rgba(31, 42, 58, 0.10);
+    --maf-ink-05:     rgba(31, 42, 58, 0.05);
+    --maf-white:      #FFFFFF;
+    --maf-cream:      #FAF7F2;
+    --maf-sand:       #F4EDE2;
+    --maf-stone-50:   #F5F6F7;
+    --maf-stone-100:  #E9EBEE;
+    --maf-stone-200:  #D2D6DC;
+
+    --font-sans: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+
+    --shadow-1: 0 1px 2px rgba(31,42,58,.06), 0 1px 1px rgba(31,42,58,.04);
+    --shadow-2: 0 4px 12px rgba(31,42,58,.08);
+    --shadow-3: 0 10px 30px rgba(31,42,58,.12);
+    --shadow-4: 0 20px 50px rgba(31,42,58,.18);
+
+    --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --dur-fast: 150ms;
+    --dur-base: 250ms;
+    --dur-slow: 400ms;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--maf-ink);
+    background: var(--maf-white);
+    font-size: 17px;
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--maf-red); text-decoration: none; transition: color var(--dur-fast) var(--ease-out); }
+  a:hover { color: var(--maf-red-deep); text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: var(--maf-red); color: #fff; }
+  :focus-visible { outline: 2px solid var(--maf-red); outline-offset: 2px; border-radius: 4px; }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    color: var(--maf-ink);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  h1 { font-size: clamp(40px, 5.4vw, 64px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; }
+  h2 { font-size: clamp(30px, 3.4vw, 44px); font-weight: 800; letter-spacing: -0.02em; }
+  h3 { font-size: 24px; font-weight: 700; }
+  h4 { font-size: 19px; font-weight: 700; }
+
+  p { margin: 0 0 16px; line-height: 1.65; text-wrap: pretty; }
+  .lead { font-size: 19px; color: var(--maf-ink-80); line-height: 1.6; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+  /* Eyebrow */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 800; color: var(--maf-red);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .eyebrow .bar { display: inline-block; width: 28px; height: 2px; background: var(--maf-red); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: var(--font-sans); font-size: 15px; font-weight: 700; letter-spacing: 0.01em;
+    border: 0; border-radius: 6px; padding: 13px 22px; cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--dur-fast) var(--ease-out);
+  }
+  .btn-primary { background: var(--maf-red); color: #fff; }
+  .btn-primary:hover { background: var(--maf-red-deep); transform: translateY(-1px); color: #fff; text-decoration: none; }
+  .btn-secondary { background: var(--maf-ink); color: #fff; }
+  .btn-secondary:hover { background: #0F1620; color: #fff; text-decoration: none; }
+  .btn-outline-white { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.7); }
+  .btn-outline-white:hover { background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1.5px #fff; color: #fff; text-decoration: none; }
+  .btn-ghost { background: transparent; color: var(--maf-ink); box-shadow: inset 0 0 0 1.5px var(--maf-ink-10); }
+  .btn-ghost:hover { background: var(--maf-ink-05); text-decoration: none; color: var(--maf-ink); }
+  .btn-lg { padding: 16px 28px; font-size: 17px; }
+
+  .btn-icon { width: 16px; height: 16px; flex: 0 0 auto; }
+
+  /* ============================================================
+     Header
+     ============================================================ */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--maf-ink-10);
+  }
+  .site-header .row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 24px; }
+  .site-header .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .site-header .brand img { height: 40px; width: auto; }
+  .site-header .brand .where {
+    font-size: 11px; font-weight: 800; color: var(--maf-ink-60);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    border-left: 1px solid var(--maf-ink-10); padding-left: 14px;
+  }
+  .site-header nav { display: flex; gap: 28px; }
+  .site-header nav a {
+    color: var(--maf-ink); text-decoration: none; font-weight: 600; font-size: 15px; padding: 8px 0; position: relative;
+  }
+  .site-header nav a:hover { color: var(--maf-red); }
+  .site-header .actions { display: flex; align-items: center; gap: 12px; }
+  @media (max-width: 880px) {
+    .site-header nav { display: none; }
+    .site-header .brand .where { display: none; }
+  }
+
+  /* ============================================================
+     Hero
+     ============================================================ */
+  .hero {
+    position: relative; min-height: 78vh; display: flex; align-items: center;
+    color: #fff; overflow: hidden;
+    background: linear-gradient(135deg, #2a3a52 0%, #1F2A3A 100%);
+  }
+  .hero .photo {
+    position: absolute; inset: 0;
+    background-image: url('assets/hero-cessna.png');
+    background-size: cover;
+    background-position: center 35%;
+  }
+  .hero .photo::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(to right, rgba(31,42,58,.82) 0%, rgba(31,42,58,.55) 50%, rgba(31,42,58,.25) 90%),
+      linear-gradient(to top, rgba(31,42,58,.6) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero .container { position: relative; z-index: 2; padding-top: 96px; padding-bottom: 96px; }
+  .hero .eyebrow { color: #fff; opacity: 0.95; }
+  .hero .eyebrow .bar { background: #fff; }
+  .hero h1 { color: #fff; max-width: 780px; margin: 18px 0 22px; }
+  .hero .lead { color: rgba(255,255,255,.92); max-width: 600px; margin: 0 0 32px; }
+  .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .hero .meta-strip {
+    margin-top: 56px; display: flex; gap: 48px; flex-wrap: wrap;
+    padding-top: 28px; border-top: 1px solid rgba(255,255,255,.18);
+    max-width: 760px;
+  }
+  .hero .meta-strip .item .l { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; opacity: 0.75; }
+  .hero .meta-strip .item .v { font-size: 17px; font-weight: 700; margin-top: 6px; }
+
+  /* ============================================================
+     Sections
+     ============================================================ */
+  .section { padding: 112px 0; }
+  .section.tint { background: var(--maf-cream); }
+  .section.sand { background: var(--maf-sand); }
+  .section.ink { background: var(--maf-ink); color: #fff; }
+  .section.ink h1, .section.ink h2, .section.ink h3 { color: #fff; }
+  .section.brand { background: var(--maf-red); color: #fff; }
+  .section.brand h2, .section.brand h3 { color: #fff; }
+  .section-head { max-width: 760px; margin: 0 auto 64px; text-align: center; }
+  .section-head .eyebrow { justify-content: center; }
+  .section-head p { color: var(--maf-ink-80); font-size: 19px; line-height: 1.6; }
+  .section.ink .section-head p,
+  .section.brand .section-head p { color: rgba(255,255,255,.86); }
+
+  /* ============================================================
+     Day-at-a-glance stats
+     ============================================================ */
+  .day-grid {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start;
+  }
+  .day-grid .copy h2 { margin-bottom: 18px; }
+  .day-grid .copy p { font-size: 18px; }
+  .day-grid .stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  }
+  .stat-card {
+    background: #fff; border: 1px solid var(--maf-ink-10); border-radius: 12px;
+    padding: 28px 26px; box-shadow: var(--shadow-1);
+    transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  }
+  .stat-card:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
+  .stat-card .n { font-size: 56px; font-weight: 800; color: var(--maf-red); line-height: 1; letter-spacing: -0.025em; }
+  .stat-card .l { margin-top: 12px; font-size: 15px; line-height: 1.5; color: var(--maf-ink-80); }
+  .stat-card .l strong { display: block; color: var(--maf-ink); font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+
+  @media (max-width: 880px) {
+    .day-grid { grid-template-columns: 1fr; gap: 40px; }
+    .day-grid .stats { gap: 20px; }
+  }
+
+  /* ============================================================
+     Cluster cards
+     ============================================================ */
+  .cluster-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  @media (max-width: 880px) { .cluster-grid { grid-template-columns: 1fr; } }
+
+  .cluster {
+    background: #fff; border-radius: 14px; overflow: hidden;
+    box-shadow: var(--shadow-2);
+    transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+    display: flex; flex-direction: column;
+  }
+  .cluster:hover { transform: translateY(-3px); box-shadow: var(--shadow-3); }
+
+  .cluster .head {
+    padding: 28px 30px 18px;
+    border-bottom: 1px solid var(--maf-ink-05);
+    display: flex; align-items: center; gap: 18px;
+  }
+  .cluster .head .num {
+    width: 52px; height: 52px; flex: 0 0 auto;
+    border-radius: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+    background: var(--maf-blue-50); color: var(--maf-blue);
+  }
+  .cluster.c2 .head .num { background: #FBE9D8; color: #8C4A12; }
+  .cluster.c3 .head .num { background: #E6F1EA; color: #2E7D4F; }
+  .cluster.c4 .head .num { background: var(--maf-red-50); color: var(--maf-red); }
+
+  .cluster .head .title h3 { margin: 0 0 4px; font-size: 22px; letter-spacing: -0.015em; }
+  .cluster .head .title .teams { font-size: 13px; color: var(--maf-ink-60); font-weight: 600; letter-spacing: 0.04em; }
+
+  .cluster .body { padding: 22px 30px 28px; display: flex; flex-direction: column; flex: 1; }
+  .cluster .body p { color: var(--maf-ink-80); margin: 0 0 18px; font-size: 16px; }
+
+  .cluster .demos {
+    list-style: none; padding: 0; margin: 0 0 22px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .cluster .demos li {
+    font-size: 14px; color: var(--maf-ink); padding-left: 22px; position: relative;
+    line-height: 1.5;
+  }
+  .cluster .demos li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 12px; height: 2px; background: var(--maf-red);
+  }
+  .cluster .demos li strong { font-weight: 700; }
+
+  .cluster .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; padding-top: 8px; }
+  .cluster .links a {
+    font-size: 13px; font-weight: 700; padding: 8px 14px;
+    border-radius: 9999px; background: var(--maf-ink-05); color: var(--maf-ink);
+    transition: background var(--dur-fast) var(--ease-out);
+  }
+  .cluster .links a:hover { background: var(--maf-ink-10); text-decoration: none; color: var(--maf-ink); }
+  .cluster .links a.primary { background: var(--maf-red); color: #fff; }
+  .cluster .links a.primary:hover { background: var(--maf-red-deep); }
+
+  /* ============================================================
+     Outputs showcase
+     ============================================================ */
+  .outputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 880px) { .outputs-grid { grid-template-columns: 1fr; } }
+
+  .output-card {
+    background: #fff; border-radius: 14px;
+    box-shadow: var(--shadow-2);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+  }
+  .output-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-3); }
+
+  .output-card .label {
+    padding: 18px 28px 0;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .output-card .label .tag {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--maf-red);
+  }
+  .output-card .label .source {
+    font-size: 12px; color: var(--maf-ink-60); font-weight: 600;
+  }
+  .output-card .preview {
+    padding: 16px 28px 24px;
+    font-size: 15px; line-height: 1.6;
+    color: var(--maf-ink-80);
+    flex: 1;
+  }
+  .output-card .preview h4 { font-size: 18px; margin: 6px 0 12px; color: var(--maf-ink); }
+  .output-card .preview .quote {
+    font-style: italic; border-left: 3px solid var(--maf-red);
+    padding: 4px 0 4px 16px; margin: 0 0 12px; color: var(--maf-ink);
+    font-size: 15px;
+  }
+  .output-card .preview ul {
+    margin: 0 0 12px; padding-left: 18px;
+  }
+  .output-card .preview ul li { margin-bottom: 6px; }
+  .output-card .meta {
+    padding: 14px 28px; border-top: 1px solid var(--maf-ink-05);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    background: var(--maf-stone-50);
+  }
+  .output-card .meta .file {
+    font-family: var(--font-mono); font-size: 12px; color: var(--maf-ink-60);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .output-card .meta a {
+    font-size: 13px; font-weight: 700; color: var(--maf-red);
+    flex: 0 0 auto;
+  }
+  .output-card .meta a::after { content: " →"; }
+
+  /* ============================================================
+     Approach / Copilot+Claude callout
+     ============================================================ */
+  .approach-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  @media (max-width: 880px) { .approach-grid { grid-template-columns: 1fr; } }
+  .approach {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 14px; padding: 32px 30px;
+  }
+  .approach h4 { color: #fff; font-size: 20px; margin: 0 0 12px; }
+  .approach p { color: rgba(255,255,255,.86); font-size: 15px; margin: 0; line-height: 1.65; }
+  .approach .num {
+    font-size: 13px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,.55); margin-bottom: 16px; display: block;
+  }
+
+  /* ============================================================
+     Vervolg / pakketten
+     ============================================================ */
+  .packages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 880px) { .packages { grid-template-columns: 1fr; } }
+  .package {
+    background: #fff; border-radius: 14px; padding: 32px 30px;
+    border: 1px solid var(--maf-ink-10);
+    box-shadow: var(--shadow-1);
+    display: flex; flex-direction: column;
+    transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+  }
+  .package:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
+  .package .letter {
+    width: 44px; height: 44px;
+    border-radius: 9999px;
+    background: var(--maf-red); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800;
+    margin-bottom: 18px;
+  }
+  .package h4 { margin: 0 0 6px; font-size: 20px; }
+  .package .dur {
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
+    color: var(--maf-ink-60); margin-bottom: 16px;
+  }
+  .package p { color: var(--maf-ink-80); font-size: 15px; margin: 0; }
+
+  /* ============================================================
+     Donation-strip-style CTA
+     ============================================================ */
+  .cta-strip {
+    background: var(--maf-red); color: #fff;
+  }
+  .cta-strip .row {
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    padding: 64px 0; flex-wrap: wrap;
+  }
+  .cta-strip h3 { color: #fff; font-size: clamp(24px, 2.8vw, 36px); margin: 0 0 8px; font-weight: 800; letter-spacing: -0.015em; }
+  .cta-strip p { margin: 0; max-width: 580px; opacity: 0.93; font-size: 17px; }
+  .cta-strip .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ============================================================
+     Footer
+     ============================================================ */
+  .site-footer {
+    background: var(--maf-ink); color: rgba(255,255,255,.78);
+    padding: 80px 0 36px;
+  }
+  .site-footer .top {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 56px;
+  }
+  @media (max-width: 880px) { .site-footer .top { grid-template-columns: 1fr; gap: 36px; } }
+  .site-footer h6 { color: #fff; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 18px; }
+  .site-footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .site-footer ul a { color: rgba(255,255,255,.7); font-size: 14px; }
+  .site-footer ul a:hover { color: #fff; text-decoration: none; }
+  .site-footer .brand img { height: 56px; width: auto; margin-bottom: 20px; filter: drop-shadow(0 0 0 #fff); }
+  .site-footer .blurb { font-size: 14px; line-height: 1.65; max-width: 360px; }
+  .site-footer .bottom {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    margin-top: 60px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12);
+    font-size: 12px; color: rgba(255,255,255,.55); letter-spacing: 0.03em;
+    flex-wrap: wrap;
+  }
+  .site-footer .bottom .credit { display: inline-flex; gap: 6px; align-items: center; }
+
+  /* ============================================================
+     Tiny utilities & reveal-on-scroll
+     ============================================================ */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Small caps tag */
+  .tag-inline {
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--maf-red);
+    padding: 4px 10px; background: var(--maf-red-50); border-radius: 9999px;
+  }
+
+  /* Inline code style */
+  code {
+    font-family: var(--font-mono); font-size: 13px;
+    background: var(--maf-ink-05); padding: 2px 6px; border-radius: 4px;
+    color: var(--maf-ink);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header">
+  <div class="container row">
+    <a class="brand" href="#top">
+      <img src="assets/logo-maf-official.png" alt="MAF Nederland" />
+      <span class="where">AI-inspiratiedag</span>
+    </a>
+    <nav aria-label="Hoofdnavigatie">
+      <a href="#de-dag">De dag</a>
+      <a href="#clusters">Clusters</a>
+      <a href="#outputs">Wat ontstond er</a>
+      <a href="#vervolg">Vervolg</a>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://github.com/bastichelaar/maf-ai-dag" target="_blank" rel="noopener">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.13c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+        Repository
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="top">
+  <div class="photo" role="img" aria-label="MAF Cessna boven een rivier in Papua"></div>
+  <div class="container">
+    <div class="eyebrow"><span class="bar"></span> AI-inspiratiedag · 20 mei 2026 · MAF Nederland</div>
+    <h1>Vier teams, vier sessies, vier werkende AI-workflows.</h1>
+    <p class="lead">Op 20 mei brachten wij teams van MAF Nederland langs vier clusters. Per cluster een live demo, een workflow-canvas, en concrete artefacten die diezelfde dag op tafel kwamen. Deze pagina bundelt wat wij maakten, zodat u en uw collega's er terug naar kunnen kijken en mee verder kunnen.</p>
+    <div class="actions">
+      <a class="btn btn-primary btn-lg" href="#clusters">Bekijk de vier clusters</a>
+      <a class="btn btn-outline-white btn-lg" href="https://github.com/bastichelaar/maf-ai-dag" target="_blank" rel="noopener">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.13c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+        Open op GitHub
+      </a>
+    </div>
+
+    <div class="meta-strip">
+      <div class="item">
+        <div class="l">Datum</div>
+        <div class="v">20 mei 2026</div>
+      </div>
+      <div class="item">
+        <div class="l">Locatie</div>
+        <div class="v">MAF Nederland, Ede</div>
+      </div>
+      <div class="item">
+        <div class="l">Begeleiding</div>
+        <div class="v">Bas Tichelaar &amp; Rik</div>
+      </div>
+      <div class="item">
+        <div class="l">Contactpersoon MAF</div>
+        <div class="v">Gilbert</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DE DAG IN HET KORT
+     ============================================================ -->
+<section class="section tint" id="de-dag">
+  <div class="container">
+    <div class="day-grid">
+      <div class="copy">
+        <div class="eyebrow"><span class="bar"></span> De dag in het kort</div>
+        <h2>Van Copilot-chat naar werkende workflows.</h2>
+        <p class="lead">MAF werkt met Microsoft Copilot binnen M365. Dat is een prima beginpunt. Op deze dag lieten wij zien wat er voorbij Copilot Chat mogelijk is met Claude-agents, MCP en gekoppelde workflows. Zonder Copilot af te branden: het zijn complementaire gereedschappen.</p>
+        <p>Per cluster volgden wij dezelfde flow: opener met mining-vragen, een live demo op fictieve MAF-data, een workflow-canvas op het bord, een quick win die het team koos, en een brug naar het vervolg. Geen plenaire opener of afsluiter, om de drempel laag te houden en de aandacht volledig bij de teams zelf te laten.</p>
+        <p>De code, de agents, de prompts, het draaiboek en alle voorbeelddata staan in <a href="https://github.com/bastichelaar/maf-ai-dag" target="_blank" rel="noopener">de publieke repository</a>. U kunt ermee verder.</p>
+      </div>
+      <div class="stats">
+        <div class="stat-card">
+          <div class="n">4</div>
+          <div class="l"><strong>Clusters</strong>Marketing, Relatiebeheer, HR &amp; Financien, Evenementen</div>
+        </div>
+        <div class="stat-card">
+          <div class="n">90<span style="font-size:.55em;color:var(--maf-ink-60);font-weight:600;letter-spacing:0">min</span></div>
+          <div class="l"><strong>Per sessie</strong>Opener, mining, live demo, canvas, brug naar vervolg</div>
+        </div>
+        <div class="stat-card">
+          <div class="n">10+</div>
+          <div class="l"><strong>Werkende agents</strong>Claude Code agents op fictieve MAF-data</div>
+        </div>
+        <div class="stat-card">
+          <div class="n">20+</div>
+          <div class="l"><strong>Artefacten</strong>Mails, posts, draaiboeken, rapporten, visualisaties</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CLUSTERS
+     ============================================================ -->
+<section class="section" id="clusters">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="bar"></span> Vier clusters</div>
+      <h2>Per cluster een werkende workflow.</h2>
+      <p>Elke cluster heeft een eigen map in de repository met agents, voorbeelddata, een Mermaid-workflow en een live-demo-draaiboek. Klik door naar de map voor de details.</p>
+    </div>
+
+    <div class="cluster-grid">
+
+      <!-- Cluster 1 -->
+      <article class="cluster c1">
+        <div class="head">
+          <div class="num">01</div>
+          <div class="title">
+            <h3>Marketing en Digital Innovation</h3>
+            <div class="teams">Marketing · Digital Innovation</div>
+          </div>
+        </div>
+        <div class="body">
+          <p>Eén donateurverhaal levert in minuten drie platformteksten op, met een MAF-brand-image en optioneel een publicatie-pakket (landingspagina, e-mail-nieuwsbrief en social card) volledig in MAF-stijl.</p>
+          <ul class="demos">
+            <li><strong>Content-pipeline:</strong> donateurverhaal naar LinkedIn, nieuwsbrief en Instagram</li>
+            <li><strong>Brand-voice-check:</strong> elke tekst getoetst aan de MAF-toon</li>
+            <li><strong>Publicatie-pakket:</strong> landing, mail en social card via de <code>maf-design</code> skill</li>
+          </ul>
+          <div class="links">
+            <a class="primary" href="https://github.com/bastichelaar/maf-ai-dag/tree/main/demos/01-marketing-di" target="_blank" rel="noopener">Open cluster</a>
+            <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/01-marketing-di/WORKFLOW.md" target="_blank" rel="noopener">Workflow</a>
+            <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/01-marketing-di/DEMO-DRAAIBOEK.md" target="_blank" rel="noopener">Draaiboek</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Cluster 2 -->
+      <article class="cluster c2">
+        <div class="head">
+          <div class="num">02</div>
+          <div class="title">
+            <h3>Relatiebeheer</h3>
+            <div class="teams">Relatiebeheer · Donateurs</div>
+          </div>
+        </div>
+        <div class="body">
+          <p>Een gespreksverslag van een uur gaat naar vier outputs zonder dat een mens twee keer hoeft te lezen. Daarbovenop een wekelijkse top-vijf van wie aandacht verdient, op basis van het CRM.</p>
+          <ul class="demos">
+            <li><strong>Gesprek-naar-flow:</strong> verslag wordt actiepunten, CRM-notitie, follow-up-mail en openstaande vragen</li>
+            <li><strong>Aandachts-radar:</strong> wekelijkse top-vijf relaties die niet vergeten mogen worden</li>
+          </ul>
+          <div class="links">
+            <a class="primary" href="https://github.com/bastichelaar/maf-ai-dag/tree/main/demos/02-relatiebeheer" target="_blank" rel="noopener">Open cluster</a>
+            <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/02-relatiebeheer/WORKFLOW.md" target="_blank" rel="noopener">Workflow</a>
+            <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/02-relatiebeheer/DEMO-DRAAIBOEK.md" target="_blank" rel="noopener">Draaiboek</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Cluster 3 -->
+      <article class="cluster c3">
+        <div class="head">
+          <div class="num">03</div>
+          <div class="title">
+            <h3>HR en Financien</h3>
+            <div class="teams">HR · Finance</div>
+          </div>
+        </div>
+        <div class="body">
+          <p>Repetitieve mailvragen krijgen een doordacht concept, onboarding-pakketten zijn in minuten klaar, en de maandcijfers leveren een afwijkingen-analyse met visualisatie zonder dat iemand een draaitabel hoeft te bouwen.</p>
+          <ul class="demos">
+            <li><strong>Mail-reactie-agent:</strong> sollicitaties, thuisfront-vragen en veld-mails krijgen een passend concept</li>
+            <li><strong>Onboarding-pakket:</strong> functieprofiel-template, welkomstbericht en checklist</li>
+            <li><strong>Rapport-helper:</strong> top-3 afwijkingen plus een interactieve visualisatie</li>
+          </ul>
+          <div class="links">
+            <a class="primary" href="https://github.com/bastichelaar/maf-ai-dag/tree/main/demos/03-hr-finance" target="_blank" rel="noopener">Open cluster</a>
+            <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/03-hr-finance/WORKFLOW.md" target="_blank" rel="noopener">Workflow</a>
+            <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/03-hr-finance/DEMO-DRAAIBOEK.md" target="_blank" rel="noopener">Draaiboek</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Cluster 4 -->
+      <article class="cluster c4">
+        <div class="head">
+          <div class="num">04</div>
+          <div class="title">
+            <h3>Evenementen</h3>
+            <div class="teams">Evenementen</div>
+          </div>
+        </div>
+        <div class="body">
+          <p>Een evenementbeschrijving en een oud draaiboek leveren een volledig communicatiepakket op: uitnodiging, herinnering en bedank-mail, draaiboek-template en evaluatieformulier. Vijftien evaluaties worden in één pass tot een leesbare samenvatting verwerkt.</p>
+          <ul class="demos">
+            <li><strong>Evenement-pakket:</strong> drie mails, draaiboek-template en evaluatieformulier in MAF-toon</li>
+            <li><strong>Evaluaties-verwerker:</strong> vijftien evaluaties naar één samenvatting met top-aandachtspunten</li>
+          </ul>
+          <div class="links">
+            <a class="primary" href="https://github.com/bastichelaar/maf-ai-dag/tree/main/demos/04-evenementen" target="_blank" rel="noopener">Open cluster</a>
+            <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/04-evenementen/WORKFLOW.md" target="_blank" rel="noopener">Workflow</a>
+            <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/04-evenementen/DEMO-DRAAIBOEK.md" target="_blank" rel="noopener">Draaiboek</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OUTPUTS SHOWCASE
+     ============================================================ -->
+<section class="section tint" id="outputs">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="bar"></span> Wat er die dag op tafel kwam</div>
+      <h2>Een greep uit de artefacten.</h2>
+      <p>Alle outputs draaien op fictieve MAF-data, maar zijn opgezet zoals zij in productie er uit zouden zien. Klik door naar het bestand voor de volledige versie.</p>
+    </div>
+
+    <div class="outputs-grid">
+
+      <!-- Output 1: LinkedIn post -->
+      <article class="output-card">
+        <div class="label">
+          <span class="tag">LinkedIn-post</span>
+          <span class="source">Cluster 01 · Marketing</span>
+        </div>
+        <div class="preview">
+          <h4>Tagamembo: een vlucht van 35 minuten</h4>
+          <p class="quote">"Toen het verzoek binnenkwam op de basis in Wamena, was de tweede baby al blauw."</p>
+          <p>Volledig verhaal van een medische evacuatie naar Papua, in MAF-toon: documentair, concreet, ingetogen. Gegenereerd uit het donateurverhaal door de content-pipeline-agent en getoetst door de brand-voice-check.</p>
+        </div>
+        <div class="meta">
+          <span class="file">demos/01-marketing-di/output/linkedin-post.md</span>
+          <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/01-marketing-di/output/linkedin-post.md" target="_blank" rel="noopener">Lees</a>
+        </div>
+      </article>
+
+      <!-- Output 2: HR mail-reactie -->
+      <article class="output-card">
+        <div class="label">
+          <span class="tag">Mailconcept</span>
+          <span class="source">Cluster 03 · HR</span>
+        </div>
+        <div class="preview">
+          <h4>Reactie op een thuisfront-vraag</h4>
+          <p class="quote">"Wat ik met u kan delen, ligt bij Daan en Marleen zelf."</p>
+          <p>Concept-antwoord op een gevoelige vraag van een thuisfront-kerngroep. Met respect voor de privacy van het veld-gezin, een duidelijke vervolgafspraak, en MAF's pastorale toon. Plaatshouders waar de menselijke beslissing zit.</p>
+        </div>
+        <div class="meta">
+          <span class="file">demos/03-hr-finance/output/concept-antwoord.md</span>
+          <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/03-hr-finance/output/concept-antwoord.md" target="_blank" rel="noopener">Lees</a>
+        </div>
+      </article>
+
+      <!-- Output 3: Finance afwijkingen -->
+      <article class="output-card">
+        <div class="label">
+          <span class="tag">Finance-rapport</span>
+          <span class="source">Cluster 03 · Finance</span>
+        </div>
+        <div class="preview">
+          <h4>Top-3 afwijkingen mei 2026</h4>
+          <ul>
+            <li>Onderhoud vliegtuigen: <strong>afname 44,7%</strong> ten opzichte van april</li>
+            <li>ICT en software: <strong>toename 162,2%</strong>, ruim boven budget</li>
+            <li>Marketing en communicatie: <strong>toename 57,6%</strong></li>
+          </ul>
+          <p>Eén keer aanroepen, drie scherpe regels en een interactieve grafiek. De finance-medewerker controleert en duidt.</p>
+        </div>
+        <div class="meta">
+          <span class="file">demos/03-hr-finance/output/afwijkingen.md</span>
+          <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/03-hr-finance/output/afwijkingen.md" target="_blank" rel="noopener">Lees</a>
+        </div>
+      </article>
+
+      <!-- Output 4: Evenement uitnodiging -->
+      <article class="output-card">
+        <div class="label">
+          <span class="tag">Uitnodiging-mail</span>
+          <span class="source">Cluster 04 · Evenementen</span>
+        </div>
+        <div class="preview">
+          <h4>MAF Donateursdag 2026</h4>
+          <p class="quote">"Zonder u zouden onze vliegtuigen aan de grond blijven."</p>
+          <p>Uitnodigingsmail voor de Donateursdag, met programma, praktische zaken en aanmeldlink. Door het evenement-pakket gegenereerd samen met herinnering, bedankmail, draaiboek-template en evaluatieformulier.</p>
+        </div>
+        <div class="meta">
+          <span class="file">demos/04-evenementen/output/uitnodiging-mail.md</span>
+          <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/04-evenementen/output/uitnodiging-mail.md" target="_blank" rel="noopener">Lees</a>
+        </div>
+      </article>
+
+      <!-- Output 5: Newsletter HTML -->
+      <article class="output-card">
+        <div class="label">
+          <span class="tag">E-mail-nieuwsbrief</span>
+          <span class="source">Cluster 01 · maf-design skill</span>
+        </div>
+        <div class="preview">
+          <h4>Volledige nieuwsbrief in MAF-stijl</h4>
+          <p>HTML-nieuwsbrief gegenereerd uit dezelfde donateurverhaal-bron. Volledig in MAF-merkkleuren, met hero-foto, lopend verhaal, donatie-strip en footer. Direct verzendbaar.</p>
+        </div>
+        <div class="meta">
+          <span class="file">demos/01-marketing-di/output/voorbeeld-publicatiepakket/email/nieuwsbrief.html</span>
+          <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/01-marketing-di/output/voorbeeld-publicatiepakket/email/nieuwsbrief.html" target="_blank" rel="noopener">Open</a>
+        </div>
+      </article>
+
+      <!-- Output 6: Relatiebeheer -->
+      <article class="output-card">
+        <div class="label">
+          <span class="tag">Aandachts-radar</span>
+          <span class="source">Cluster 02 · Relatiebeheer</span>
+        </div>
+        <div class="preview">
+          <h4>Wie verdient deze week aandacht?</h4>
+          <p>Wekelijkse top-vijf uit een CRM-extract en historische contacten. Geen oordeel over de grootte van de gift, maar over wie verwaarloosd dreigt te raken. Per relatie ook een conceptbericht klaar om te versturen.</p>
+        </div>
+        <div class="meta">
+          <span class="file">demos/02-relatiebeheer/AGENT-aandachts-radar.md</span>
+          <a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/02-relatiebeheer/AGENT-aandachts-radar.md" target="_blank" rel="noopener">Bekijk agent</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     APPROACH (donker)
+     ============================================================ -->
+<section class="section ink">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="bar"></span> Onze aanpak</div>
+      <h2 style="color:#fff">Copilot is het beginpunt, niet het eindpunt.</h2>
+      <p>Copilot en Claude zijn complementair. Copilot is de handige collega in de bekende M365-tools. Claude is de specialist voor moeilijker werk. Workflow-tools zijn de lijm. MCP is hoe een agent zelfstandig door de hele keten heen werkt.</p>
+    </div>
+
+    <div class="approach-grid">
+      <div class="approach">
+        <span class="num">01 — Skills</span>
+        <h4>Vaardigheden bundelen</h4>
+        <p>Een skill is een herbruikbare instructie-set met voorbeelddata, brand-voice en stijl. Eén keer goed neergezet, daarna door het hele team aanroepbaar in Copilot, Claude of een Custom GPT.</p>
+      </div>
+      <div class="approach">
+        <span class="num">02 — Agents</span>
+        <h4>Werk dat zichzelf doet</h4>
+        <p>Een agent neemt een hele taak van A tot Z over. Mail-reactie, verslag-naar-CRM, draaiboek-uit-evenement. De mens controleert en bekrachtigt, niet typt.</p>
+      </div>
+      <div class="approach">
+        <span class="num">03 — MCP</span>
+        <h4>Gekoppeld aan uw eigen systemen</h4>
+        <p>Met MCP gaat een agent verder dan losse bestanden. SharePoint, CRM, mail, Teams, kalender. Dezelfde demo, maar dan op echte MAF-data, in productie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VERVOLG / PAKKETTEN
+     ============================================================ -->
+<section class="section" id="vervolg">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="bar"></span> Vervolg</div>
+      <h2>Drie manieren om verder te gaan.</h2>
+      <p>Wij hebben drie pakketten klaarliggen, in oplopende diepte. Welke past is een gesprek waard. De prioriteit voor vervolgcontact ligt bij Digital Innovation (ambassadeur intern), Marketing (content-pipeline) en Donateurs (data plus persoonlijke communicatie op schaal).</p>
+    </div>
+
+    <div class="packages">
+      <div class="package">
+        <div class="letter">A</div>
+        <h4>Quick Wins Sprint</h4>
+        <div class="dur">4 weken</div>
+        <p>Eén werkende use case per cluster, opgeleverd in vier weken. Tastbare resultaten waar het team direct mee verder kan.</p>
+      </div>
+      <div class="package">
+        <div class="letter">B</div>
+        <h4>Workflow Implementation</h4>
+        <div class="dur">8 tot 12 weken</div>
+        <p>End-to-end workflow door meerdere teams heen, met MCP-koppelingen naar SharePoint, het CRM en M365. Productieklaar.</p>
+      </div>
+      <div class="package">
+        <div class="letter">C</div>
+        <h4>AI Center of Excellence</h4>
+        <div class="dur">Doorlopend</div>
+        <p>Digital Innovation coachen als intern ambassadeur. Wij staan ernaast en bouwen capaciteit op binnen MAF zelf.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA STRIP
+     ============================================================ -->
+<section class="cta-strip">
+  <div class="container">
+    <div class="row">
+      <div>
+        <h3>Verder praten?</h3>
+        <p>De volledige documentatie, de agents en alle voorbeelddata staan publiek op GitHub. Voor een gesprek over een vervolg zijn wij bereikbaar via mail.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-outline-white btn-lg" href="https://github.com/bastichelaar/maf-ai-dag" target="_blank" rel="noopener">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.13c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+          Open repository
+        </a>
+        <a class="btn btn-secondary btn-lg" href="mailto:bas@skyworkz.nl?subject=AI-inspiratiedag%20MAF%20%E2%80%94%20vervolg">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Mail Bas
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="top">
+      <div>
+        <div class="brand">
+          <img src="assets/logo-maf-official-reverse.png" alt="MAF Nederland" />
+        </div>
+        <p class="blurb">Materiaal van de AI-inspiratiedag op 20 mei 2026 bij Stichting MAF Nederland. Opgesteld door Bas Tichelaar en Rik, met dank aan Gilbert en alle deelnemende teams.</p>
+      </div>
+      <div>
+        <h6>Op deze pagina</h6>
+        <ul>
+          <li><a href="#de-dag">De dag in het kort</a></li>
+          <li><a href="#clusters">Vier clusters</a></li>
+          <li><a href="#outputs">Wat ontstond er</a></li>
+          <li><a href="#vervolg">Vervolg</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Bronnen</h6>
+        <ul>
+          <li><a href="https://github.com/bastichelaar/maf-ai-dag" target="_blank" rel="noopener">Repository</a></li>
+          <li><a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/sessies-draaiboek.md" target="_blank" rel="noopener">Sessies-draaiboek</a></li>
+          <li><a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/demos/README.md" target="_blank" rel="noopener">Demos-overzicht</a></li>
+          <li><a href="https://github.com/bastichelaar/maf-ai-dag/blob/main/tools-spiekbriefje.md" target="_blank" rel="noopener">Tools-spiekbriefje</a></li>
+          <li><a href="https://maf.nl" target="_blank" rel="noopener">MAF Nederland</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>&copy; 2026 — Materiaal opgesteld voor Stichting MAF Nederland.</span>
+      <span class="credit">Opgemaakt met de <code style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)">maf-design</code> skill.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal-on-scroll: subtle fade-up
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.section, .cluster, .output-card, .package, .stat-card').forEach((el) => {
+    el.classList.add('reveal'); io.observe(el);
+  });
+</script>
+
+</body>
+</html>
