@@ -13,12 +13,12 @@
      MAF Nederland — design tokens (subset)
      ============================================================ */
   :root {
-    --maf-red:        #450003;
-    --maf-red-deep:   #380003;
-    --maf-red-50:     #F8E8E8;
-    --maf-blue:       #004073;
-    --maf-blue-deep:  #002848;
-    --maf-blue-50:    #E6EEF5;
+    --maf-red:        #d01d20;
+    --maf-red-deep:   #a8161a;
+    --maf-red-50:     #fbe4e5;
+    --maf-blue:       #002f5f;
+    --maf-blue-deep:  #002f5f;
+    --maf-blue-50:    #e1e8f0;
     --maf-ink:        #1F2A3A;
     --maf-ink-80:     rgba(31, 42, 58, 0.80);
     --maf-ink-60:     rgba(31, 42, 58, 0.60);
@@ -383,6 +383,83 @@
   .package p { color: var(--maf-ink-80); font-size: 15px; margin: 0; }
 
   /* ============================================================
+     AI Champions sectie
+     ============================================================ */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 56px; }
+  @media (max-width: 880px) { .pillars { grid-template-columns: 1fr; } }
+  .pillar {
+    background: #fff; border-radius: 14px; padding: 30px 28px;
+    border: 1px solid var(--maf-ink-10);
+    box-shadow: var(--shadow-1);
+  }
+  .pillar .icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--maf-red-50); color: var(--maf-red);
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .pillar .icon svg { width: 22px; height: 22px; }
+  .pillar h4 { margin: 0 0 6px; font-size: 19px; }
+  .pillar p { color: var(--maf-ink-80); font-size: 15px; margin: 0; line-height: 1.6; }
+
+  .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 56px; counter-reset: phase; }
+  @media (max-width: 880px) { .phases { grid-template-columns: 1fr; } }
+  .phase {
+    background: #fff; border-radius: 14px; padding: 28px 28px 26px;
+    border: 1px solid var(--maf-ink-10);
+    position: relative; overflow: hidden;
+  }
+  .phase::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--maf-red);
+  }
+  .phase .when {
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 800;
+    color: var(--maf-red); margin-bottom: 8px;
+  }
+  .phase h4 { font-size: 18px; margin: 0 0 10px; }
+  .phase p { color: var(--maf-ink-80); font-size: 14px; line-height: 1.55; margin: 0; }
+
+  .savings {
+    background: var(--maf-ink); color: #fff; border-radius: 16px;
+    padding: 40px 44px; margin-bottom: 56px;
+    box-shadow: var(--shadow-3);
+  }
+  .savings .head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 24px; flex-wrap: wrap; }
+  .savings .head h3 { color: #fff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.015em; }
+  .savings .head .from-demo { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: rgba(255,255,255,.55); }
+  .savings-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .savings-table th, .savings-table td { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.12); text-align: left; }
+  .savings-table th { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: rgba(255,255,255,.55); }
+  .savings-table th:nth-child(2), .savings-table th:nth-child(3),
+  .savings-table td:nth-child(2), .savings-table td:nth-child(3) { text-align: right; }
+  .savings-table tr:last-child td { border-bottom: 0; font-weight: 800; }
+  .savings-table tr.total td { padding-top: 18px; font-size: 17px; }
+  .savings-table tr.total td:nth-child(3) { color: #fff; }
+  .savings .caption { margin-top: 22px; color: rgba(255,255,255,.86); font-size: 15px; line-height: 1.6; max-width: 720px; }
+
+  .roles-block { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+  @media (max-width: 880px) { .roles-block { grid-template-columns: 1fr; gap: 32px; } }
+  .roles-block h3 { font-size: 26px; margin: 0 0 12px; }
+  .roles-block p { color: var(--maf-ink-80); font-size: 16px; }
+  .roles { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .roles li {
+    background: #fff; border: 1px solid var(--maf-ink-10); border-radius: 10px;
+    padding: 14px 18px; display: flex; align-items: center; gap: 14px;
+    font-size: 15px; color: var(--maf-ink);
+    transition: box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .roles li:hover { box-shadow: var(--shadow-2); }
+  .roles li .team {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 800;
+    color: var(--maf-red); flex: 0 0 auto;
+    background: var(--maf-red-50); padding: 5px 10px; border-radius: 9999px;
+  }
+  .roles li .focus { color: var(--maf-ink-80); font-size: 14px; }
+  .roles li.optional .team { background: var(--maf-ink-05); color: var(--maf-ink-60); }
+
+  /* ============================================================
      Donation-strip-style CTA
      ============================================================ */
   .cta-strip {
@@ -476,7 +553,7 @@
   <div class="container">
     <div class="eyebrow"><span class="bar"></span> AI-inspiratiedag · 20 mei 2026 · MAF Nederland</div>
     <h1>Vier teams, vier sessies, vier werkende AI-workflows.</h1>
-    <p class="lead">Op 20 mei brachten wij teams van MAF Nederland langs vier clusters. Per cluster een live demo, een workflow-canvas, en concrete artefacten die diezelfde dag op tafel kwamen. Deze pagina bundelt wat wij maakten, zodat u en uw collega's er terug naar kunnen kijken en mee verder kunnen.</p>
+    <p class="lead">Op 20 mei werkten wij in vier sessies met de teams van MAF Nederland. Per cluster een live demo, een workflow-canvas, en concrete artefacten die diezelfde dag op tafel kwamen. Deze pagina bundelt wat wij maakten, zodat jullie er terug naar kunnen kijken en mee verder kunnen.</p>
     <div class="actions">
       <a class="btn btn-primary btn-lg" href="#clusters">Bekijk de vier clusters</a>
       <a class="btn btn-outline-white btn-lg" href="https://github.com/bastichelaar/maf-ai-dag" target="_blank" rel="noopener">
@@ -517,7 +594,7 @@
         <h2>Van Copilot-chat naar werkende workflows.</h2>
         <p class="lead">MAF werkt met Microsoft Copilot binnen M365. Dat is een prima beginpunt. Op deze dag lieten wij zien wat er voorbij Copilot Chat mogelijk is met Claude-agents, MCP en gekoppelde workflows. Zonder Copilot af te branden: het zijn complementaire gereedschappen.</p>
         <p>Per cluster volgden wij dezelfde flow: opener met mining-vragen, een live demo op fictieve MAF-data, een workflow-canvas op het bord, een quick win die het team koos, en een brug naar het vervolg. Geen plenaire opener of afsluiter, om de drempel laag te houden en de aandacht volledig bij de teams zelf te laten.</p>
-        <p>De code, de agents, de prompts, het draaiboek en alle voorbeelddata staan in <a href="https://github.com/bastichelaar/maf-ai-dag" target="_blank" rel="noopener">de publieke repository</a>. U kunt ermee verder.</p>
+        <p>De code, de agents, de prompts, het draaiboek en alle voorbeelddata staan in <a href="https://github.com/bastichelaar/maf-ai-dag" target="_blank" rel="noopener">de publieke repository</a>. Jullie kunnen ermee verder.</p>
       </div>
       <div class="stats">
         <div class="stat-card">
@@ -797,7 +874,7 @@
       </div>
       <div class="approach">
         <span class="num">03 — MCP</span>
-        <h4>Gekoppeld aan uw eigen systemen</h4>
+        <h4>Gekoppeld aan jullie eigen systemen</h4>
         <p>Met MCP gaat een agent verder dan losse bestanden. SharePoint, CRM, mail, Teams, kalender. Dezelfde demo, maar dan op echte MAF-data, in productie.</p>
       </div>
     </div>
@@ -811,29 +888,105 @@
   <div class="container">
     <div class="section-head">
       <div class="eyebrow"><span class="bar"></span> Vervolg</div>
-      <h2>Drie manieren om verder te gaan.</h2>
-      <p>Wij hebben drie pakketten klaarliggen, in oplopende diepte. Welke past is een gesprek waard. De prioriteit voor vervolgcontact ligt bij Digital Innovation (ambassadeur intern), Marketing (content-pipeline) en Donateurs (data plus persoonlijke communicatie op schaal).</p>
+      <h2>Een AI Champions traject.</h2>
+      <p>De inspiratiedag liet zien dat MAF de mensen heeft. De volgende stap is een klein traject waarin een handvol van die mensen zelfstandig hun eigen werkproces automatiseert. Wij begeleiden, zij bouwen. Wat zij bouwen, blijft van MAF. Wat zij leren, geven zij intern door.</p>
     </div>
 
-    <div class="packages">
-      <div class="package">
-        <div class="letter">A</div>
-        <h4>Quick Wins Sprint</h4>
-        <div class="dur">4 weken</div>
-        <p>Eén werkende use case per cluster, opgeleverd in vier weken. Tastbare resultaten waar het team direct mee verder kan.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h4>8 weken doorlooptijd</h4>
+        <p>Kick-off dagdeel op kantoor, wekelijkse begeleidings-calls, afsluitend review-dagdeel met presentaties aan een kring van geïnteresseerden.</p>
       </div>
-      <div class="package">
-        <div class="letter">B</div>
-        <h4>Workflow Implementation</h4>
-        <div class="dur">8 tot 12 weken</div>
-        <p>End-to-end workflow door meerdere teams heen, met MCP-koppelingen naar SharePoint, het CRM en M365. Productieklaar.</p>
+      <div class="pillar">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h4>4 tot 6 Champions</h4>
+        <p>Eén Champion per cluster, plus een optionele wildcard. Gemotiveerd, beschikbaar voor circa vier uur per week, bereid om collega's mee te nemen na afloop.</p>
       </div>
-      <div class="package">
-        <div class="letter">C</div>
-        <h4>AI Center of Excellence</h4>
-        <div class="dur">Doorlopend</div>
-        <p>Digital Innovation coachen als intern ambassadeur. Wij staan ernaast en bouwen capaciteit op binnen MAF zelf.</p>
+      <div class="pillar">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-3V4a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v3H4a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h4>Tools die MAF al heeft</h4>
+        <p>Copilot Studio en Power Automate als startpunt, omdat MAF de licenties heeft. Custom GPTs of Claude waar de complexiteit dat rechtvaardigt. Geen tool wordt geforceerd.</p>
       </div>
+    </div>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="when">Week 1</div>
+        <h4>Kick-off dagdeel</h4>
+        <p>Per Champion één werkproces in kaart, knelpunten benoemen, kans-workflow kiezen. Tool-keuze samen vastleggen. Werkplan per Champion: scope, ophaalmoment, eerste stap.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 2 tot 7</div>
+        <h4>Begeleide bouw</h4>
+        <p>Champions bouwen zelf, wij coachen. Wekelijkse groeps-call van 45 minuten. 1-op-1 calls op verzoek wanneer iemand vastloopt. Asynchrone hulp via mail of Teams.</p>
+      </div>
+      <div class="phase">
+        <div class="when">Week 8</div>
+        <h4>Review dagdeel</h4>
+        <p>Champions presenteren hun workflow. Per workflow: wat werkt, wat is fragiel, wat is de volgende uitbouw. Ons advies over het MAF-brede vervolg.</p>
+      </div>
+    </div>
+
+    <div class="savings">
+      <div class="head">
+        <h3>Wat een workflow concreet oplevert</h3>
+        <span class="from-demo">Voorbeeld uit cluster 02 · Relatiebeheer</span>
+      </div>
+      <table class="savings-table">
+        <thead>
+          <tr>
+            <th>Stap</th>
+            <th>Handmatig nu</th>
+            <th>Met workflow</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Notulen donateursgesprek uitwerken</td>
+            <td>20 minuten</td>
+            <td>2 minuten review</td>
+          </tr>
+          <tr>
+            <td>Vervolgacties in CRM zetten</td>
+            <td>10 minuten</td>
+            <td>automatisch voorgesteld</td>
+          </tr>
+          <tr>
+            <td>Bedankmail in MAF-toon</td>
+            <td>15 minuten</td>
+            <td>3 minuten review</td>
+          </tr>
+          <tr class="total">
+            <td>Totaal per gesprek</td>
+            <td>45 minuten</td>
+            <td>5 minuten</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="caption">Bij vijf gesprekken per week per medewerker: ruim drie uur tijdwinst per persoon per week. Voor vier tot zes Champions samen, elk met een eigen workflow, denken we realistisch aan vijftien tot vijfentwintig uur per week structureel vrij in de organisatie na afloop. Het echte effect zit echter in de fase erna: de Champions trekken collega's mee.</p>
+    </div>
+
+    <div class="roles-block">
+      <div>
+        <h3>Wie zijn de Champions</h3>
+        <p>Ons advies voor de samenstelling van de groep. De definitieve invulling bespreken we graag samen tijdens een verkennende afspraak, op basis van wie jullie zelf in gedachten hebben.</p>
+        <p>Kerneigenschappen waar wij samen op selecteren: gemotiveerd, beschikbaar voor ongeveer vier uur per week tijdens het traject, en bereid om collega's mee te nemen na afloop.</p>
+      </div>
+      <ul class="roles">
+        <li><span class="team">Digital Innovation</span><span class="focus">Ambassadeur-rol intern, technisch sterk</span></li>
+        <li><span class="team">Marketing</span><span class="focus">Content-workflows, hoge zichtbaarheid</span></li>
+        <li><span class="team">Relatiebeheer</span><span class="focus">Volume aan persoonlijke communicatie</span></li>
+        <li><span class="team">HR of Finance</span><span class="focus">Gestructureerde processen, rapportages</span></li>
+        <li><span class="team">Evenementen</span><span class="focus">Terugkerende draaiboeken</span></li>
+        <li class="optional"><span class="team">Wildcard</span><span class="focus">Optioneel, vrijwilliger met intrinsieke motivatie</span></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -845,17 +998,13 @@
   <div class="container">
     <div class="row">
       <div>
-        <h3>Verder praten?</h3>
-        <p>De volledige documentatie, de agents en alle voorbeelddata staan publiek op GitHub. Voor een gesprek over een vervolg zijn wij bereikbaar via mail.</p>
+        <h3>Een verkennende afspraak?</h3>
+        <p>Een gesprek van 30 tot 45 minuten met Gilbert en eventueel een tweede beslisser om dit voorstel door te lopen en de invulling per Champion te bespreken. Wij zijn flexibel in de planning en kunnen ook online als dat sneller gaat.</p>
       </div>
       <div class="actions">
-        <a class="btn btn-outline-white btn-lg" href="https://github.com/bastichelaar/maf-ai-dag" target="_blank" rel="noopener">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.13c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.66.79.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
-          Open repository
-        </a>
-        <a class="btn btn-secondary btn-lg" href="mailto:bas@skyworkz.nl?subject=AI-inspiratiedag%20MAF%20%E2%80%94%20vervolg">
+        <a class="btn btn-secondary btn-lg" href="mailto:bas@skyworkz.nl?subject=AI%20Champions%20traject%20MAF%20%E2%80%94%20verkennende%20afspraak">
           <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Mail Bas
+          Plan een gesprek in
         </a>
       </div>
     </div>
