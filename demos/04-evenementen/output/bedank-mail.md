@@ -24,5 +24,5 @@ Nogmaals dank voor uw komst en voor uw trouwe betrokkenheid bij MAF.
 
 Met hartelijke groet,
 
-Frans van der Knaap
+Frans v.d. K.
 Directeur MAF Nederland

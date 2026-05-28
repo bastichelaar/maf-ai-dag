@@ -45,5 +45,5 @@ Het team Communicatie en Fondsenwerving bestaat uit 7 personen, vier vrouwen en 
 
 - Jorrit komt vanuit een vergelijkbare functie bij een andere christelijke hulporganisatie. Hij hoeft de basis niet uitgelegd te krijgen.
 - Hij neemt direct het portfolio van M. Steensma (vertrekkend medewerker) over, met ongeveer 80 actieve relaties.
-- Eerste twee weken meelopen met Karin Bos voor warme overdracht.
+- Eerste twee weken meelopen met Karin B. voor warme overdracht.
 - Belangrijk: laat hem zelf zijn werkwijze ontwikkelen, geen rigide protocol opdringen.

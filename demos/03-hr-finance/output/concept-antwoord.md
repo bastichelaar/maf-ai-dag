@@ -1,6 +1,6 @@
 ---
 type: thuisfront
-afzender: Esther de Jong
+afzender: Esther de J.
 onderwerp: Re: Vraag over verlofperiode Daan en Marleen
 ---
 

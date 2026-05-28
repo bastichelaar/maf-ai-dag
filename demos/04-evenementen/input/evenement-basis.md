@@ -18,7 +18,7 @@ Donateurs en geinteresseerden persoonlijk welkom heten bij MAF-Ede, de wereld va
 
 ## Sprekers en sessies
 
-- 10:30 - 10:50: Welkom door directeur Frans van der Knaap
+- 10:30 - 10:50: Welkom door directeur Frans v.d. K.
 - 11:00 - 12:30: Getuigenissen piloten (3 x 25 min)
 - 12:30 - 13:30: Lunch + podcast-opname
 - 13:30 - 14:30: Rondleiding hangar + technische sessie

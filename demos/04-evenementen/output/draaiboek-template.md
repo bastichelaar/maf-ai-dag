@@ -2,7 +2,7 @@
 
 **Locatie:** MAF-hoofdkantoor Ede + Eventcenter
 **Verwachte opkomst:** 180 tot 220 deelnemers (groei ten opzichte van 142 in 2025)
-**Hoofdverantwoordelijke:** Marjolein de Wit (Coordinator Evenementen)
+**Hoofdverantwoordelijke:** Marjolein de W. (Coordinator Evenementen)
 
 > Lessen uit 2025 zijn in dit template verwerkt. Punten gemarkeerd met (les 2025) zijn aanpassingen op basis van de vorige editie.
 
@@ -42,7 +42,7 @@
 
 ### 10:00 - 12:30 Ochtendprogramma
 - [ ] 10:00 - 10:30: Inloop met koffie en gebak
-- [ ] 10:30 - 10:50: Opening en welkom door directeur Frans van der Knaap (20 min)
+- [ ] 10:30 - 10:50: Opening en welkom door directeur Frans v.d. K. (20 min)
 - [ ] 11:00 - 11:25: Getuigenis piloot Tsjaad (25 min)
 - [ ] 11:25 - 11:30: Korte wissel
 - [ ] 11:30 - 11:55: Getuigenis piloot Papua (25 min)

@@ -14,7 +14,7 @@ Op deze dag delen drie piloten uit Tsjaad, Papua en Suriname hun verhaal over wa
 
 **Programma in het kort**
 
-- Ochtend: opening door directeur Frans van der Knaap en getuigenissen van piloten
+- Ochtend: opening door directeur Frans v.d. K. en getuigenissen van piloten
 - Lunch: warme maaltijd in het Eventcenter met live podcast-opname
 - Middag: hangar-bezoek, technische sessie en Q&A met directie
 
@@ -36,5 +36,5 @@ Wij hopen u op 12 september te ontmoeten.
 
 Met hartelijke groet,
 
-Marjolein de Wit
+Marjolein de W.
 Coordinator Evenementen, MAF Nederland

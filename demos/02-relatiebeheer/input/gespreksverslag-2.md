@@ -1,8 +1,11 @@
 # Gespreksverslag: Familie Visser-Bakker
 
+> **Fictieve demo-data.** Alle persoonsnamen, plaatsnamen, bedragen en gespreksinhoud zijn verzonnen voor de MAF AI-inspiratiedag. Overeenkomsten met werkelijke personen of situaties berusten op toeval.
+
+
 **Datum:** donderdag 23 april 2026
 **Locatie:** kerkelijke gemeente De Voorhof, Bunschoten, na de avonddienst
-**Aanwezig:** echtpaar Visser-Bakker (nieuwe donateurs), Karin Bos (relatiebeheer MAF), ds. Hesselink (kort)
+**Aanwezig:** echtpaar Visser-Bakker (nieuwe donateurs), Karin B. (relatiebeheer MAF), ds. H. (kort)
 **Duur:** ongeveer 25 minuten
 
 ## Aanleiding

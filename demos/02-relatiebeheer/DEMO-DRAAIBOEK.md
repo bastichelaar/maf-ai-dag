@@ -11,7 +11,7 @@ cd /home/bas/dev/maf-ai-dag/demos/02-relatiebeheer
 ls input/
 # Verwacht:
 # - gespreksverslag-1.md, gespreksverslag-2.md
-# - crm-extract.csv
+# - crm-extract-fictief.csv
 # - historische-contacten/ (3 bestanden)
 ls output/
 # Leeg of alleen .gitkeep
@@ -63,7 +63,7 @@ Wissel naar de tweede agent.
 
 > "Nu een ander soort werk. Stel: het is maandagochtend. Jullie hebben 30 relaties die niet allemaal vandaag gebeld kunnen worden. Welke verdienen aandacht?"
 
-> "Lees AGENT-aandachts-radar.md en gedraag je als die agent. Scan input/crm-extract.csv en input/historische-contacten/, en lever een top-5 wie deze week aandacht verdient."
+> "Lees AGENT-aandachts-radar.md en gedraag je als die agent. Scan input/crm-extract-fictief.csv en input/historische-contacten/, en lever een top-5 wie deze week aandacht verdient."
 
 Wat te verwachten:
 - Claude leest CSV en historische contacten

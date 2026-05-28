@@ -1,8 +1,11 @@
 # Gespreksverslag: Mevrouw J. de Lange-Verhoef
 
+> **Fictieve demo-data.** Alle persoonsnamen, plaatsnamen, bedragen en gespreksinhoud zijn verzonnen voor de MAF AI-inspiratiedag. Overeenkomsten met werkelijke personen of situaties berusten op toeval.
+
+
 **Datum:** maandag 11 mei 2026
 **Locatie:** thuisbezoek, Heerde
-**Aanwezig:** mevrouw J. de Lange-Verhoef (donateur), Karin Bos (relatiebeheer MAF)
+**Aanwezig:** mevrouw J. de Lange-Verhoef (donateur), Karin B. (relatiebeheer MAF)
 **Duur:** ongeveer 75 minuten
 
 ## Aanleiding

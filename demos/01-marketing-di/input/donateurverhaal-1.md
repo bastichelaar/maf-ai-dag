@@ -3,13 +3,13 @@
 **Bron:** MAF Papua, juni 2026
 **Type verhaal:** medische evacuatie
 **Toestel:** Cessna 208 Caravan, PK-MEH
-**Piloot:** Daan Heerink
+**Piloot:** Daan H.
 
 ## Het verslag
 
 Op een donderdagmiddag in mei kwam er een verzoek binnen op de basis in Wamena. In het dorp Tagamembo, drie uur lopen van de dichtstbijzijnde landingsbaan, was een vrouw bevallen van een tweeling. De tweede baby was blauw. De moeder bloedde nog steeds. De plaatselijke verpleger had bijna geen verband meer.
 
-Daan Heerink, sinds vijf jaar piloot bij MAF Papua, kreeg de melding om 14:20. De weersvoorspelling was niet ideaal: een wolkenfront kwam vanaf het zuiden, en de landingsbaan in Tagamembo ligt op 1.450 meter hoogte, met een bocht in de aanvliegroute. Daan besloot toch te gaan. "Met een tweeling en een moeder die bloedt, kun je niet wachten op morgen."
+Daan H., sinds vijf jaar piloot bij MAF Papua, kreeg de melding om 14:20. De weersvoorspelling was niet ideaal: een wolkenfront kwam vanaf het zuiden, en de landingsbaan in Tagamembo ligt op 1.450 meter hoogte, met een bocht in de aanvliegroute. Daan besloot toch te gaan. "Met een tweeling en een moeder die bloedt, kun je niet wachten op morgen."
 
 Om 15:05 vertrok de Cessna 208 met aan boord een tweede piloot, een Nederlandse zendelingsverpleegkundige die toevallig op de basis was, en medisch materiaal. De vlucht duurde 35 minuten. Bij aankomst stond een groep dorpsbewoners klaar, samen met de plaatselijke verpleger die de moeder had verbonden met wat hij had.
 

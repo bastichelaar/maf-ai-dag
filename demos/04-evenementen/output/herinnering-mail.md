@@ -31,5 +31,5 @@ Wij kijken ernaar uit u te ontvangen.
 
 Met hartelijke groet,
 
-Marjolein de Wit
+Marjolein de W.
 Coordinator Evenementen, MAF Nederland

@@ -1,8 +1,11 @@
 # Contact-notitie: M. Steensma
 
+> **Fictieve demo-data.** Persoonsnamen, plaatsnamen en inhoud zijn verzonnen voor de MAF AI-inspiratiedag.
+
+
 **Datum:** 12 november 2024
 **Type:** telefonisch gesprek, 20 min
-**Door:** Karin Bos, MAF relatiebeheer
+**Door:** Karin B., MAF relatiebeheer
 
 ## Inhoud
 

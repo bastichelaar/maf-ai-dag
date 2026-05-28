@@ -1,8 +1,11 @@
 # Contact-notitie: Y. Tjong
 
+> **Fictieve demo-data.** Persoonsnamen, plaatsnamen en inhoud zijn verzonnen voor de MAF AI-inspiratiedag.
+
+
 **Datum:** 5 april 2026
 **Type:** schriftelijk (eenmalige donatie + dankmail-uitwisseling)
-**Door:** Karin Bos, MAF relatiebeheer
+**Door:** Karin B., MAF relatiebeheer
 
 ## Inhoud
 

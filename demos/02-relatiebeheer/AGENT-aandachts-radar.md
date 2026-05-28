@@ -10,7 +10,7 @@ Je bent een agent die elke maandagochtend door MAF's relaties- en donateurslijst
 
 ## Wat je doet
 
-1. Lees `input/crm-extract.csv` (kolommen: naam, type-relatie, laatste-contact-datum, gever-categorie, opmerking)
+1. Lees `input/crm-extract-fictief.csv` (kolommen: naam, type-relatie, laatste-contact-datum, gever-categorie, opmerking)
 2. Lees alle bestanden in `input/historische-contacten/` voor extra context per relatie
 3. Bepaal voor elke relatie een aandachts-score op basis van:
    - Hoe lang geleden was het laatste contact?

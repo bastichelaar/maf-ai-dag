@@ -1,9 +1,9 @@
 ---
 fictief: true
 type: thuisfront
-afzender: Esther de Jong
+afzender: Esther de J.
 afzender_email: esther.dejong@kerkbarneveld.nl
-afzender_rol: Coordinator thuisfrontteam familie Heerink
+afzender_rol: Coordinator thuisfrontteam familie H.
 datum: 2026-05-14
 onderwerp: Vraag over verlofperiode Daan en Marleen
 ontvanger: thuisfront@maf.nl
@@ -11,7 +11,7 @@ ontvanger: thuisfront@maf.nl
 
 Hoi Arjen,
 
-Hopelijk gaat het goed met je. Ik schrijf je namens het thuisfrontteam van Daan en Marleen Heerink in Wamena, Papua. We zijn met tien mensen vanuit onze kerk in Barneveld en we hebben sinds twee jaar elke maand een gebedsbijeenkomst en een nieuwsbrief.
+Hopelijk gaat het goed met je. Ik schrijf je namens het thuisfrontteam van Daan en Marleen H. in Wamena, Papua. We zijn met tien mensen vanuit onze kerk in Barneveld en we hebben sinds twee jaar elke maand een gebedsbijeenkomst en een nieuwsbrief.
 
 Twee dingen waar we benieuwd naar zijn:
 
@@ -21,6 +21,6 @@ Ten tweede: we maken ons een beetje zorgen om Marleen. In haar laatste audio-ber
 
 Hartelijke groet,
 
-Esther de Jong
-Coordinator thuisfrontteam familie Heerink
+Esther de J.
+Coordinator thuisfrontteam familie H.
 Hervormde Gemeente Barneveld

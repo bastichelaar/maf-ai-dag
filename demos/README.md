@@ -1,5 +1,7 @@
 # Demo's voor de MAF AI-dag 20 mei
 
+> **Alle voorbeelddata in deze demos is verzonnen.** Persoonsnamen, organisatie-namen, plaatsnamen, financiele cijfers, mailinhoud en relatie-historie zijn opgesteld als demo-materiaal voor de AI-inspiratiedag op 20 mei 2026. Overeenkomsten met werkelijke MAF-medewerkers, donateurs, partners of situaties berusten op toeval. Per cluster staat een korte toelichting in de bijbehorende `input/README.md`.
+
 Vier werkende demo-pakketten, één per cluster. Elk pakket bevat een of twee gespecialiseerde Claude Code agents, een Mermaid-workflow voor op groot scherm, een live-demo-draaiboek, en fictieve MAF-voorbeelddata. Cluster 1 heeft daarnaast een afbeeldings-skill die een MAF-brand-image genereert via Google Gemini, plus een optionele uitbreiding met de `maf-design` skill (op repo-root in `.claude/skills/maf-design/`) die uit de content drie publicatie-klare HTML-artefacten maakt: landingspagina, e-mail-nieuwsbrief en social card.
 
 ## Lees eerst

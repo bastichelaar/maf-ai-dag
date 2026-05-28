@@ -4,7 +4,7 @@ Toon-richtlijn voor mail-correspondentie vanuit het HR-team van MAF Nederland. G
 
 ## Wie wij zijn als HR-team
 
-Vijf mensen onder Thamar van den Brink. Klein team, divers werk. We hanteren een warme, zakelijke toon. We zijn dichtbij de medewerker en bij de uitgezondene op het veld. We schrijven helder en zonder omhaal.
+Vijf mensen onder Thamar v.d. B.. Klein team, divers werk. We hanteren een warme, zakelijke toon. We zijn dichtbij de medewerker en bij de uitgezondene op het veld. We schrijven helder en zonder omhaal.
 
 ## Wie ons schrijft
 
